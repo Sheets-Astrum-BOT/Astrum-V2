@@ -69,10 +69,14 @@ class AFK(commands.Cog):
                     pass
 
                 embed = discord.Embed(
-                    title="AFK Removed", description=f"{user.display_name} Is No Longer AFK", color=discord.Color.green())
+                    title="User Is AFK", description=f"{user.display_name} Is Currently AFK", color=discord.Color.green())
+                
+                if afk_message:
+                    embed.add_field(name="AFK Message", value=afk_message, inline=False)
+
                 await message.channel.send(embed=embed)
 
-                await user.send(f"You were mentioned in {message.guild.name} by {message.author.display_name} in {message.channel.mention}. Your AFK status has been removed.")
+                await user.send(f"You Were Mentioned By {message.author.display_name} In {message.channel.mention}")
 
         if str(message.author.id) in self.afk_data:
             original_name = self.afk_data[str(message.author.id)]["original_name"]

@@ -1,3 +1,24 @@
+from flask import Flask, render_template
+from threading import Thread
+
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return '''<body style="margin: 0; padding: 0;">
+    <iframe width="100%" height="100%" src="https://astrumbot.vercel.app/" frameborder="0" allowfullscreen></iframe>
+  </body>'''
+
+
+def run():
+    app.run(host='0.0.0.0', port=10403)
+
+def keep_alive():  
+    t = Thread(target=run)
+    t.start()
+
+keep_alive()
+
 import os
 import re
 
@@ -22,7 +43,7 @@ async def on_ready():
     print(f'STATUS : ONLINE')
     print(f'======================= ')
     print(f'BOT : {bot.user}')
-    await bot.change_presence(activity=discord.Game(name="Under Maintanance"))
+    await bot.change_presence(activity=discord.Game(name="With Stars"))
 
     start_time = datetime.datetime.now()
     bot.start_time = start_time
@@ -133,7 +154,6 @@ class MeaningView(discord.ui.View):
         await self.ctx.respond(embed=embed)
 
 
-bot.load_extension('Cogs.AI')
 bot.load_extension('Cogs.Fun')
 bot.load_extension('Cogs.AFK')
 bot.load_extension('Cogs.Help')
@@ -145,4 +165,4 @@ bot.load_extension('Cogs.Information')
 bot.load_extension('Cogs.Entertainment')
 
 
-bot.run('BOT TOKEN')
+bot.run('YOUR TOKEN')

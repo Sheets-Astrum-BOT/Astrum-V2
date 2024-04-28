@@ -1,18 +1,21 @@
-from flask import Flask
-from threading import Thread
-import logging 
 
-logger = logging.getLogger("werkzeug")
-logger.setLevel(logging.ERROR) 
-app = Flask('')
+from flask import Flask, render_template
+from threading import Thread
+
+app = Flask(__name__)
 
 @app.route('/')
-def home():
-    return "Bot Is Up And Running"
+def index():
+    return '''<body style="margin: 0; padding: 0;">
+    <iframe width="100%" height="100%" src="https://astrumbot.vercel.app/" frameborder="0" allowfullscreen></iframe>
+  </body>'''
+
 
 def run():
-  app.run(port=8000)
+    app.run(host='0.0.0.0', port=10403)
 
-def KeepAlive():
+def keep_alive():  
     t = Thread(target=run)
     t.start()
+
+keep_alive()

@@ -27,14 +27,13 @@ class Help(commands.Cog):
             color=0x2f3136
         )
 
-        cembed.add_field(name="AI", value="\u200b", inline=True)
         cembed.add_field(name="AFK", value="\u200b", inline=True)
         cembed.add_field(name="Fun", value="\u200b", inline=True)
         cembed.add_field(name="Help", value="\u200b", inline=True)
         cembed.add_field(name="Anime", value="\u200b", inline=True)
         cembed.add_field(name="Utility", value="\u200b", inline=True)
         cembed.add_field(name="Reminder", value="\u200b", inline=True)
-        cembed.add_field(name="-----------------------------", value="\u200b", inline=True)
+        cembed.add_field(name="-----------------------------", value="\u200b", inline=False)
         cembed.add_field(name="Moderation", value="\u200b", inline=False)
         cembed.add_field(name="Information", value="\u200b", inline=False)
         cembed.add_field(name="Entertainment", value="\u200b", inline=False)
@@ -132,6 +131,14 @@ class CEmbed(discord.ui.View):
         Funembed.add_field(name=f"{self.bot.get_application_command('rps').mention}", value="Play Rock Paper Scissors", inline=False)
         Funembed.add_field(name=f"{self.bot.get_application_command('customquote').mention}", value="Create A Quote", inline=False)
         Funembed.add_field(name=f"{self.bot.get_application_command('moviequote').mention}", value="Get A Random Quote From Famous Series", inline=False)
+        Funembed.add_field(name=f"{self.bot.get_application_command('gif').mention}", value="Sends A Gif", inline=False)
+        Funembed.add_field(name=f"{self.bot.get_application_command('dance').mention}", value="Dance With A User", inline=False)
+        Funembed.add_field(name=f"{self.bot.get_application_command('roast').mention}", value="Roast / Insult A User", inline=False)
+        Funembed.add_field(name=f"{self.bot.get_application_command('kill').mention}", value="Kill A User", inline=False)
+        Funembed.add_field(name=f"{self.bot.get_application_command('kiss').mention}", value="Kiss a User", inline=False)
+        Funembed.add_field(name=f"{self.bot.get_application_command('cuddle').mention}", value="Cuddle With a User", inline=False)
+        Funembed.add_field(name=f"{self.bot.get_application_command('pat').mention}", value="Pat a User", inline=False)
+        Funembed.add_field(name=f"{self.bot.get_application_command('simp').mention}", value="Simp a User", inline=False)
 
         Helpembed = discord.Embed(
             title="Help",

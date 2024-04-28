@@ -334,8 +334,10 @@ class AnimeUpdateSettings(discord.ui.View):
         await interaction.response.defer()
 
         self.enabled_channels[str(interaction.guild.id)] = self.channel.id
+
         with open("Anime.json", "w") as file:
             json.dump(self.enabled_channels, file)
+            
         await interaction.followup.send("Updates Enabled For This Channel.")
 
     @discord.ui.button(

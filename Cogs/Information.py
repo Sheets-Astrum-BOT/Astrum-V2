@@ -48,14 +48,19 @@ class Information(commands.Cog):
 
         embed = discord.Embed(title="Server Information", color=discord.Color.blurple())
         embed.set_thumbnail(url=guild.icon.url)
-        embed.add_field(name="Name", value=guild.name)
-        embed.add_field(name="ID", value=guild.id)
-        embed.add_field(name="Owner", value=guild.owner.display_name)
-        embed.add_field(name="Members", value=guild.member_count, inline=False)
-        embed.add_field(name="Channels", value=channels, inline=False)
+        embed.add_field(name="Name", value=f'{guild.name} ({guild.id})', inline=False)
+        embed.add_field(name="Owner", value=guild.owner.name, inline=False)
+        embed.add_field(name="Roles", value=len(guild.roles) )
+        embed.add_field(name="Boosts", value=guild.premium_subscription_count )
+        embed.add_field(name="Emojis", value=len(guild.emojis))
+        embed.add_field(name="Members", value=guild.member_count)
+        embed.add_field(name="Channels", value=channels)
         embed.add_field(name="Created At", value=guild.created_at.strftime("%Y-%m-%d %H:%M:%S"), inline=False)
+        embed.add_field(name="Boost Level", value=guild.premium_tier, inline=False)
+        embed.add_field(name="Verification Level", value=guild.verification_level, inline=False)
 
         await ctx.respond(embed=embed)
+
 
 def setup(bot):
     bot.add_cog(Information(bot))
