@@ -139,6 +139,8 @@ class CEmbed(discord.ui.View):
         Funembed.add_field(name=f"{self.bot.get_application_command('cuddle').mention}", value="Cuddle With a User", inline=False)
         Funembed.add_field(name=f"{self.bot.get_application_command('pat').mention}", value="Pat a User", inline=False)
         Funembed.add_field(name=f"{self.bot.get_application_command('simp').mention}", value="Simp a User", inline=False)
+        Funembed.add_field(name=f"{self.bot.get_application_command('punch').mention}", value="Punch a User", inline=False)
+        Funembed.add_field(name=f"{self.bot.get_application_command('murder').mention}", value="Murder a User", inline=False)
 
         Helpembed = discord.Embed(
             title="Help",
@@ -157,6 +159,8 @@ class CEmbed(discord.ui.View):
         Animeembed.add_field(name=f"{self.bot.get_application_command('mangasearch').mention}", value="Sends Information About A Manga", inline=False)
         Animeembed.add_field(name=f"{self.bot.get_application_command('topanime').mention}", value="Sends Streaming Link Of A Manga", inline=False)
         Animeembed.add_field(name=f"{self.bot.get_application_command('settings').mention}", value="Enable/Disable Anime Updates", inline=False)
+        Animeembed.add_field(name=f"{self.bot.get_application_command('waifu').mention}", value="Sends A Random Waifu", inline=False)
+        Animeembed.add_field(name=f"{self.bot.get_application_command('nwaifu').mention}", value="Sends A Random NSFW Waifu", inline=False)
 
         Utilsembed = discord.Embed(
             title="Utility",

@@ -1,10 +1,43 @@
 import json
-import discord
+import asyncio
 import aiohttp
+import discord
+import requests
+from discord import option
 from discord.ui.item import Item
 from discord.ext import commands, tasks
 
 from AnilistPython import Anilist
+
+
+async def swaifu(tag: str):
+    url = "https://api.waifu.im/search"
+
+    params = {"included_tags": [tag], "is_nsfw": 'false'}
+
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url, params=params) as response:
+            if response.status == 200:
+                data = await response.json()
+                if "images" in data and len(data["images"]) > 0:
+                    image_url = data["images"][0]["url"]
+
+                    return image_url
+
+
+async def nwaifu(tag: str):
+    url = f"https://api.waifu.pics/nsfw/{tag}"
+
+
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url) as response:
+            if response.status == 200:
+                data = await response.json()
+
+                if "url" in data:
+                    image_url = data["url"]
+
+                    return image_url
 
 
 class AnimeCog(commands.Cog):
@@ -24,6 +57,70 @@ class AnimeCog(commands.Cog):
 
     def cog_unload(self):
         self.check_website.cancel()
+
+    @commands.slash_command(
+        name="waifu",
+        description="Get A Random Waifu Image",
+    )
+    @option("tag", description="Choose The Category", choices=[
+        "maid",
+        "waifu",
+        "oppai",
+        "selfies",
+        "uniform"
+    ])
+    async def waifu(self, ctx, tag: str):
+        await ctx.defer()
+
+        try:
+            image_url = await swaifu(tag)
+
+            if image_url:
+                embed = discord.Embed(
+                    title="OniChan Here I Am <3",
+                    color=discord.Color.blurple(),
+                )
+                embed.set_image(url=image_url)
+
+                await ctx.respond(embed=embed)
+
+            else:
+                await ctx.respond("No Waifu Image Found For This Tag")
+
+        except Exception as e:
+            await ctx.respond(f"An Error Occurred : {e}")
+
+    @commands.slash_command(
+        name="nwaifu",
+        description="Get A Random NSFW Waifu Image",
+        nsfw = True
+    )
+    @option("tag", description="Choose The Category", choices=[
+        "waifu",
+        "neko",
+        "trap",
+        "blowjob"
+    ])
+    async def nwaifu(self, ctx, tag: str):
+        await ctx.defer()
+
+        try:
+            image_url = await nwaifu(tag)
+
+            if image_url:
+                embed = discord.Embed(
+                    title="OniChan Here I Am <3",
+                    color=discord.Color.blurple(),
+                )
+                embed.set_image(url=image_url)
+
+                await ctx.respond(embed=embed)
+
+            else:
+                await ctx.respond("No Waifu Image Found For This Tag")
+
+        except Exception as e:
+            await ctx.respond(f"An Error Occurred : {e}")
 
     @commands.slash_command(
         name="anisearch", description="Get Information About An Anime"
@@ -337,7 +434,7 @@ class AnimeUpdateSettings(discord.ui.View):
 
         with open("Anime.json", "w") as file:
             json.dump(self.enabled_channels, file)
-            
+
         await interaction.followup.send("Updates Enabled For This Channel.")
 
     @discord.ui.button(

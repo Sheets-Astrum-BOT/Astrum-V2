@@ -1,5 +1,5 @@
-import aiohttp
 import random
+import aiohttp
 import requests
 
 import discord
@@ -37,7 +37,6 @@ def moviequote():
     data = response.json()
 
 
- 
 class Fun(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -600,6 +599,180 @@ class Fun(commands.Cog):
     
                 await ctx.respond(f"{user.mention}",embed=embed)
 
+    @commands.slash_command(name="punch", description="Punch A User")
+    async def punch(self, ctx, user: discord.Member):
+                
+        punch_gif = get_gif('anime_punch')
+
+        if user == ctx.author:
+
+            embed = discord.Embed(
+                title="Punch",
+                description=f"{ctx.author.mention} Punched Themselves",
+                color=0xFF5733,
+            )
+
+            embed.add_field(
+                name="Hmm Is It Possible ?", value="\u200b", inline=False
+            )
+            embed.add_field(name="Ha They Are Out Of Thier Minds", value="\u200b", inline=False)
+            embed.set_image(url=punch_gif)
+
+            await ctx.respond(embed=embed)
+            return
+
+        if user.id == self.bot.user.id:
+            embed = discord.Embed(
+                title="Punch",
+                description=f"{ctx.author.mention} Punched Me, I'm A Bot",
+                color=0xFF5733,
+            )
+            await ctx.respond(embed=embed)
+            return
+
+        developer = 727012870683885578
+
+        if user.id == developer:
+            embed = discord.Embed(
+                title="Punch",
+                description=f"{ctx.author.mention} Punched My Developer",
+                color=0xFF5733,
+            )
+
+            embed.add_field(name="Reason", value="Because They Needed It", inline=False)
+            embed.set_image(url=punch_gif)
+
+            await ctx.respond(embed=embed)
+            return
+
+        else:
+
+            embed = discord.Embed(
+                title="Punch",
+                description=f"{ctx.author.mention} Punched {user.mention}",
+                color=0xFF5733,
+            )
+            embed.add_field(name="Reason", value="Because They Needed It", inline=False)
+            embed.set_image(url=punch_gif)
+
+            await ctx.respond(f"{user.mention}",embed=embed)
+
+    @commands.slash_command(name="murder", description="Murder A User")
+    async def murder(self, ctx, user: discord.Member):
+        
+        murder_gif = get_gif('anime_murder')
+        
+        if user == ctx.author:
+    
+                embed = discord.Embed(
+                    title="Murder !?",
+                    description=f"{ctx.author.mention} Killed Themselves",
+                    color=0xFF5733,
+                )
+    
+                embed.add_field(
+                    name="In The Era Of Suicide", value="\u200b", inline=False
+                )
+                embed.add_field(name="Because They Needed To Do It", value="\u200b", inline=False)
+                embed.set_image(url=murder_gif)
+    
+                await ctx.respond(embed=embed)
+                return
+    
+        if user.id == self.bot.user.id:
+            embed = discord.Embed(
+                title="Murder ?!",
+                description=f"{ctx.author.mention} Tried To Murder Me, I'm A Bot",
+                color=0xFF5733,
+            )
+            await ctx.respond(embed=embed)
+            return
+
+        developer = 727012870683885578
+
+        if user.id == developer:
+            embed = discord.Embed(
+                title="Murder ?!",
+                description=f"{ctx.author.mention} Tried To Murder My Developer",
+                color=0xFF5733,
+            )
+
+            embed.add_field(name="What The Hell ?!", value="Sorry He's My Dev\nIf He Dies No One Looks At This Poor Bot TT", inline=False)
+
+            await ctx.respond(embed=embed)
+            return
+
+        else:
+
+            embed = discord.Embed(
+                title="Murder ?!",
+                description=f"{ctx.author.mention} Murdered {user.mention}",
+                color=0xFF5733,
+            )
+            embed.add_field(name="Reason", value="Because They Were Frustrated", inline=False)
+            embed.set_image(url=murder_gif)
+
+            await ctx.respond(f'{user.mention}',embed=embed)
+
+    @commands.slash_command(name="bully", description = "Bully A User")
+    async def bully(self, ctx, user: discord.Member):
+
+        bully_gif = get_gif("anime_bully")
+
+        if user == ctx.author:
+    
+                embed = discord.Embed(
+                    title="Bully",
+                    description=f"{ctx.author.mention} Bullied Themselves\n\n### Wait WTF",
+                    color=0xFF5733,
+                )
+    
+                embed.add_field(
+                    name="OMFG Save ME !", value="\u200b", inline=False
+                )
+                embed.add_field(name="Because They Are Out Of Thier Minds ?", value="\u200b", inline=False)
+                embed.set_image(url=bully_gif)
+    
+                await ctx.respond(embed=embed)
+                return
+    
+        if user.id == self.bot.user.id:
+            embed = discord.Embed(
+                title="Bully",
+                description=f"{ctx.author.mention} Tried To Bully Me, I'm A Bot",
+                color=0xFF5733,
+            )
+            await ctx.respond(embed=embed)
+            return
+
+        developer = 727012870683885578
+
+        if user.id == developer:
+            embed = discord.Embed(
+                title="Kill",
+                description=f"{ctx.author.mention} Tried To Bully My Developer",
+                color=0xFF5733,
+            )
+
+            embed.add_field(name="What The Hell ?!", value="Sorry He's My Dev\nIf He Becomes Sad No One Looks At This Poor Bot TT", inline=False)
+
+            await ctx.respond(embed=embed)
+            return
+
+        else:
+
+            embed = discord.Embed(
+                title="Kill",
+                description=f"{ctx.author.mention} Bullied {user.mention}",
+                color=0xFF5733,
+            )
+            embed.add_field(name="Reason", value="Because They Needed To Get Bullied", inline=False)
+            embed.set_image(url=bully_gif)
+
+            await ctx.respond(f'{user.mention}',embed=embed)
+
+    
+
     @commands.slash_command(name="kiss", description="Kiss A User")
     async def kiss(self, ctx, user: discord.Member):
             
@@ -660,116 +833,116 @@ class Fun(commands.Cog):
     @commands.slash_command(name="cuddle", description="Cuddle A User")
     async def cuddle(self, ctx, user: discord.Member):
                 
-                cuddle_gif = get_gif('anime_cuddle')
-        
-                if user == ctx.author:
-        
-                    embed = discord.Embed(
-                        title="Cuddle",
-                        description=f"{ctx.author.mention} Cuddled Themselves",
-                        color=0xFF5733,
-                    )
-        
-                    embed.add_field(
-                        name="Huh How ?!", value="\u200b", inline=False
-                    )
-                    embed.add_field(name="Ahhhhhh Help ME", value="\u200b", inline=False)
-        
-                    await ctx.respond(embed=embed)
-                    return
-        
-                if user.id == self.bot.user.id:
-                    embed = discord.Embed(
-                        title="Cuddle",
-                        description=f"{ctx.author.mention} Cuddled Me, I'm A Bot",
-                        color=0xFF5733,
-                    )
-                    await ctx.respond(embed=embed)
-                    return
-        
-                developer = 727012870683885578
-        
-                if user.id == developer:
-                    embed = discord.Embed(
-                        title="Cuddle",
-                        description=f"{ctx.author.mention} Cuddled My Developer",
-                        color=0xFF5733,
-                    )
-        
-                    embed.add_field(name="Reason", value="Because They Needed It", inline=False)
-                    embed.set_image(url=cuddle_gif)
-        
-                    await ctx.respond(embed=embed)
-                    return
-        
-                else:
-        
-                    embed = discord.Embed(
-                        title="Cuddle",
-                        description=f"{ctx.author.mention} Cuddled {user.mention}",
-                        color=0xFF5733,
-                    )
-                    embed.add_field(name="Reason", value="Because They Needed It", inline=False)
-                    embed.set_image(url=cuddle_gif)
-        
-                    await ctx.respond(f"{user.mention}",embed=embed)
+        cuddle_gif = get_gif('anime_cuddle')
+
+        if user == ctx.author:
+
+            embed = discord.Embed(
+                title="Cuddle",
+                description=f"{ctx.author.mention} Cuddled Themselves",
+                color=0xFF5733,
+            )
+
+            embed.add_field(
+                name="Huh How ?!", value="\u200b", inline=False
+            )
+            embed.add_field(name="Ahhhhhh Help ME", value="\u200b", inline=False)
+
+            await ctx.respond(embed=embed)
+            return
+
+        if user.id == self.bot.user.id:
+            embed = discord.Embed(
+                title="Cuddle",
+                description=f"{ctx.author.mention} Cuddled Me, I'm A Bot",
+                color=0xFF5733,
+            )
+            await ctx.respond(embed=embed)
+            return
+
+        developer = 727012870683885578
+
+        if user.id == developer:
+            embed = discord.Embed(
+                title="Cuddle",
+                description=f"{ctx.author.mention} Cuddled My Developer",
+                color=0xFF5733,
+            )
+
+            embed.add_field(name="Reason", value="Because They Needed It", inline=False)
+            embed.set_image(url=cuddle_gif)
+
+            await ctx.respond(embed=embed)
+            return
+
+        else:
+
+            embed = discord.Embed(
+                title="Cuddle",
+                description=f"{ctx.author.mention} Cuddled {user.mention}",
+                color=0xFF5733,
+            )
+            embed.add_field(name="Reason", value="Because They Needed It", inline=False)
+            embed.set_image(url=cuddle_gif)
+
+            await ctx.respond(f"{user.mention}",embed=embed)
 
     @commands.slash_command(name="dance", description="Dance With A User")
     async def dance(self, ctx, user: discord.Member):
                     
-                    dance_gif = get_gif('anime_dance')
-            
-                    if user == ctx.author:
-            
-                        embed = discord.Embed(
-                            title="Dance",
-                            description=f"{ctx.author.mention} Danced Alone",
-                            color=0xFF5733,
-                        )
-            
-                        embed.add_field(
-                            name="Ok Not That Bad", value="\u200b", inline=False
-                        )
-                        embed.add_field(name="Because They Found No One TT", value="\u200b", inline=False)
-            
-                        await ctx.respond(embed=embed)
-                        return
-            
-                    if user.id == self.bot.user.id:
-                        embed = discord.Embed(
-                            title="Dance",
-                            description=f"{ctx.author.mention} Danced With Me, I'm A Bot",
-                            color=0xFF5733,
-                        )
-                        await ctx.respond(embed=embed)
-                        return
-            
-                    developer = 727012870683885578
-            
-                    if user.id == developer:
-                        embed = discord.Embed(
-                            title="Dance",
-                            description=f"{ctx.author.mention} Danced With My Developer",
-                            color=0xFF5733,
-                        )
-            
-                        embed.add_field(name="Reason", value="Because They Needed To", inline=False)
-                        embed.set_image(url=dance_gif)
-            
-                        await ctx.respond(embed=embed)
-                        return
-            
-                    else:
-            
-                        embed = discord.Embed(
-                            title="Dance",
-                            description=f"{ctx.author.mention} Danced With {user.mention}",
-                            color=0xFF5733,
-                        )
-                        embed.add_field(name="Reason", value="Because They Needed To", inline=False)
-                        embed.set_image(url=dance_gif)
-            
-                        await ctx.respond(f"{user.mention}",embed=embed)
+        dance_gif = get_gif('anime_dance')
+
+        if user == ctx.author:
+
+            embed = discord.Embed(
+                title="Dance",
+                description=f"{ctx.author.mention} Danced Alone",
+                color=0xFF5733,
+            )
+
+            embed.add_field(
+                name="Ok Not That Bad", value="\u200b", inline=False
+            )
+            embed.add_field(name="Because They Found No One TT", value="\u200b", inline=False)
+
+            await ctx.respond(embed=embed)
+            return
+
+        if user.id == self.bot.user.id:
+            embed = discord.Embed(
+                title="Dance",
+                description=f"{ctx.author.mention} Danced With Me, I'm A Bot",
+                color=0xFF5733,
+            )
+            await ctx.respond(embed=embed)
+            return
+
+        developer = 727012870683885578
+
+        if user.id == developer:
+            embed = discord.Embed(
+                title="Dance",
+                description=f"{ctx.author.mention} Danced With My Developer",
+                color=0xFF5733,
+            )
+
+            embed.add_field(name="Reason", value="Because They Needed To", inline=False)
+            embed.set_image(url=dance_gif)
+
+            await ctx.respond(embed=embed)
+            return
+
+        else:
+
+            embed = discord.Embed(
+                title="Dance",
+                description=f"{ctx.author.mention} Danced With {user.mention}",
+                color=0xFF5733,
+            )
+            embed.add_field(name="Reason", value="Because They Needed To", inline=False)
+            embed.set_image(url=dance_gif)
+
+            await ctx.respond(f"{user.mention}",embed=embed)
 
 
 def setup(bot):
