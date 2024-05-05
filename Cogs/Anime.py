@@ -13,7 +13,7 @@ from AnilistPython import Anilist
 async def swaifu(tag: str):
     url = "https://api.waifu.im/search"
 
-    params = {"included_tags": [tag], "is_nsfw": 'false'}
+    params = {"included_tags": [tag], "is_nsfw": "false"}
 
     async with aiohttp.ClientSession() as session:
         async with session.get(url, params=params) as response:
@@ -27,7 +27,6 @@ async def swaifu(tag: str):
 
 async def nwaifu(tag: str):
     url = f"https://api.waifu.pics/nsfw/{tag}"
-
 
     async with aiohttp.ClientSession() as session:
         async with session.get(url) as response:
@@ -62,13 +61,11 @@ class AnimeCog(commands.Cog):
         name="waifu",
         description="Get A Random Waifu Image",
     )
-    @option("tag", description="Choose The Category", choices=[
-        "maid",
-        "waifu",
-        "oppai",
-        "selfies",
-        "uniform"
-    ])
+    @option(
+        "tag",
+        description="Choose The Category",
+        choices=["maid", "waifu", "oppai", "selfies", "uniform"],
+    )
     async def waifu(self, ctx, tag: str):
         await ctx.defer()
 
@@ -91,16 +88,13 @@ class AnimeCog(commands.Cog):
             await ctx.respond(f"An Error Occurred : {e}")
 
     @commands.slash_command(
-        name="nwaifu",
-        description="Get A Random NSFW Waifu Image",
-        nsfw = True
+        name="nwaifu", description="Get A Random NSFW Waifu Image", nsfw=True
     )
-    @option("tag", description="Choose The Category", choices=[
-        "waifu",
-        "neko",
-        "trap",
-        "blowjob"
-    ])
+    @option(
+        "tag",
+        description="Choose The Category",
+        choices=["waifu", "neko", "trap", "blowjob"],
+    )
     async def nwaifu(self, ctx, tag: str):
         await ctx.defer()
 
@@ -358,20 +352,28 @@ class AnimeCog(commands.Cog):
 
     @tasks.loop(minutes=30)
     async def check_website(self):
+
         for guild_id, channel_id in self.enabled_channels.items():
+
+
             guild = self.bot.get_guild(int(guild_id))
 
             if guild is None:
                 continue
 
             channel = guild.get_channel(int(channel_id))
+
             if channel is None:
                 continue
 
+            print(f"Anime Update For : {guild} Channel : {channel}")
+
             async with aiohttp.ClientSession() as session:
+
                 async with session.get(
                     "https://astrumanimeapi.vercel.app/anime/gogoanime/recent-episodes"
                 ) as resp:
+
                     data = await resp.json()
 
                     if self.last_entry_id != data["results"][0]["id"]:
@@ -382,9 +384,11 @@ class AnimeCog(commands.Cog):
                                 anime_name=result["title"]
                             )
                             anime_name = anime_dict["name_english"]
+
                             image = anime_dict["banner_image"]
 
                             anime_id = self.anilist.get_anime_id(result["title"])
+
                             anime_url = f"https://anilist.co/anime/{anime_id}/"
 
                         except:
@@ -397,7 +401,17 @@ class AnimeCog(commands.Cog):
                             description="\u200b",
                             color=discord.Color.blurple(),
                         )
-                        embed.add_field(name=anime_name, value="\u200b", inline=False)
+
+                        if anime_name != None:
+                            embed.add_field(
+                                name=anime_name, value="\u200b", inline=False
+                            )
+
+                        else:
+                            embed.add_field(
+                                name=result["title"], value="\u200b", inline=False
+                            )
+
                         embed.add_field(
                             name=f"Episode : {result['episodeNumber']}",
                             value="\u200b",
@@ -409,7 +423,7 @@ class AnimeCog(commands.Cog):
                         embed.set_footer(text="Use Settings To Enable/Disable Updates")
 
                         await channel.send(embed=embed)
-                        self.last_entry_id = result["id"]
+
 
     @check_website.before_loop
     async def before_check_website(self):
