@@ -135,40 +135,47 @@ class MeaningView(discord.ui.View):
         
 class TicTacToeButton(discord.ui.Button["TicTacToe"]):
     def __init__(self, x: int, y: int):
-
         super().__init__(style=discord.ButtonStyle.secondary, label="\u200b", row=y)
         self.x = x
         self.y = y
-        
+
     async def callback(self, interaction: discord.Interaction):
         assert self.view is not None
         view: TicTacToe = self.view
         state = view.board[self.y][self.x]
+
         if state in (view.X, view.O):
-            return
+            return await interaction.response.send_message("This Position Is Already Occupied!", ephemeral=True)
+
+        current_player_id = view.players[view.current_player_index].id
+
+        if interaction.user.id != current_player_id:
+            return await interaction.response.send_message("It's Not Your Turn!", ephemeral=True)
 
         if view.current_player == view.X:
             self.style = discord.ButtonStyle.danger
             self.label = "X"
             view.board[self.y][self.x] = view.X
-            view.current_player = view.O
             content = "It Is Now O's Turn"
+            view.current_player_index = (view.current_player_index + 1) % 2 
+            view.current_player = view.O
         else:
             self.style = discord.ButtonStyle.success
             self.label = "O"
             view.board[self.y][self.x] = view.O
-            view.current_player = view.X
             content = "It Is Now X's Turn"
+            view.current_player_index = (view.current_player_index + 1) % 2 
+            view.current_player = view.X
 
         self.disabled = True
         winner = view.check_board_winner()
         if winner is not None:
             if winner == view.X:
-                content = "X Won"
+                content = "X Won!"
             elif winner == view.O:
-                content = "O Won"
+                content = "O Won!"
             else:
-                content = "It's A Tie"
+                content = "It's A Tie !"
 
             for child in view.children:
                 child.disabled = True
@@ -177,64 +184,79 @@ class TicTacToeButton(discord.ui.Button["TicTacToe"]):
 
         await interaction.response.edit_message(content=content, view=view)
 
+class AcceptButton(discord.ui.Button):
+    def __init__(self):
+        super().__init__(style=discord.ButtonStyle.success, label="Accept")
+
+    async def callback(self, interaction: discord.Interaction):
+        assert self.view is not None
+        view: TicTacToe = self.view
+        await interaction.response.send_message("Challenge Accepted!", ephemeral=True)
+
+class DeclineButton(discord.ui.Button):
+    def __init__(self):
+        super().__init__(style=discord.ButtonStyle.danger, label="Decline")
+
+    async def callback(self, interaction: discord.Interaction):
+        assert self.view is not None
+        view: TicTacToe = self.view
+        await interaction.response.send_message("Challenge Declined!", ephemeral=True)
+        view.stop()
 
 class TicTacToe(discord.ui.View):
-
-    children: List[TicTacToeButton]
     X = -1
     O = 1
     Tie = 2
 
-    def __init__(self):
+    def __init__(self, challenger: discord.Member, opponent: discord.Member):
         super().__init__()
-        self.current_player = self.X
+        self.players = [challenger, opponent]
+        self.current_player_index = 0
+        self.current_player = self.X 
         self.board = [
             [0, 0, 0],
             [0, 0, 0],
             [0, 0, 0],
         ]
 
+        self.add_item(AcceptButton())
+        self.add_item(DeclineButton())
+
         for x in range(3):
             for y in range(3):
                 self.add_item(TicTacToeButton(x, y))
 
-    def check_board_winner(self):
+    async def interaction_check(self, interaction: discord.Interaction) -> bool:
+        return interaction.user in self.players
 
-        for across in self.board:
-            value = sum(across)
-            if value == 3:
-                return self.O
-            elif value == -3:
-                return self.X
+    async def on_button_click(self, interaction: discord.Interaction):
+        pass
 
-        for line in range(3):
-            value = self.board[0][line] + self.board[1][line] + self.board[2][line]
-            if value == 3:
-                return self.O
-            elif value == -3:
-                return self.X
+bot = commands.Bot(command_prefix="!")
 
-        diag = self.board[0][2] + self.board[1][1] + self.board[2][0]
-        if diag == 3:
-            return self.O
-        elif diag == -3:
-            return self.X
-
-        diag = self.board[0][0] + self.board[1][1] + self.board[2][2]
-        if diag == -3:
-            return self.X
-        elif diag == 3:
-            return self.O
-
-        if all(i != 0 for row in self.board for i in row):
-            return self.Tie
-
-        return None
-
+@bot.command(name="tictactoe", description="Challenge Another Player To Play Tic Tac Toe")
+async def tictactoe(ctx: commands.Context, opponent: discord.Member):
+    challenger = ctx.author
+    if opponent == ctx.author:
+        return await ctx.respond("You Cannot Challenge Yourself !")
     
-@bot.slash_command(name="tictactoe", description="Play Tic Tac Toe With An User")
-async def tictactoe(ctx: commands.Context):
-    await ctx.respond("Tic Tac Toe: X Goes First :D", view=TicTacToe())
+    message = await ctx.respond(f"{opponent.mention}, You Have Been Challanged By {challenger.mention} To Play Tic Tac Toe ! Do You Accept ?")
+    
+    def check(reaction, user):
+        return user == opponent and str(reaction.emoji) in ["✅", "❌"] and reaction.message.id == message.id
+    
+    try:
+        reaction, _ = await bot.wait_for("reaction_add", timeout=60.0, check=check)
+    except asyncio.TimeoutError:
+        return await ctx.respond("Challenge Timed Out !")
+    
+    if str(reaction.emoji) == "❌":
+        return await ctx.respond(f"{opponent.mention} Declined The Challenge !")
+    
+    game = TicTacToe(challenger, opponent)
+    await message.delete()
+
+    await ctx.respond(f"Tic Tac Toe : {challenger.display_name} Goes First !", view=game)
     
 bot.load_extension('Cogs.Fun')
 bot.load_extension('Cogs.AFK')
