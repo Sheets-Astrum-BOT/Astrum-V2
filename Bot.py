@@ -133,6 +133,7 @@ class MeaningView(discord.ui.View):
         await self.ctx.respond(embed=embed)
 
 
+
 bot.load_extension('Cogs.Fun')
 bot.load_extension('Cogs.AFK')
 bot.load_extension('Cogs.Help')
@@ -144,4 +145,4 @@ bot.load_extension('Cogs.Information')
 bot.load_extension('Cogs.Entertainment')
 
 
-bot.run('MTExMTU1NTY1MjYxMjAxODI0Ng.GqQO-U.iljyuDF1CBQS81Vvh44HbeZ84Y5ScTDcaotBq4')
+bot.run('')
