@@ -248,4 +248,4 @@ bot.load_extension('Cogs.Information')
 bot.load_extension('Cogs.Entertainment')
 
 
-bot.run('MTExMTU1NTY1MjYxMjAxODI0Ng.GZkFKu.mX-lXXeL6VwOBDt3W6JaygJQlHJF9iYCKQ2wAE')
+bot.run('')
