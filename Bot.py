@@ -274,6 +274,7 @@ bot.load_extension('Cogs.Fun')
 bot.load_extension('Cogs.AFK')
 bot.load_extension('Cogs.Help')
 bot.load_extension('Cogs.Anime')
+bot.load_extension('Cogs.Emotes')
 bot.load_extension('Cogs.Utils')
 # bot.load_extension('Cogs.ModelAI')
 bot.load_extension('Cogs.Reminder')
@@ -282,4 +283,4 @@ bot.load_extension('Cogs.Information')
 bot.load_extension('Cogs.Entertainment')
 
 
-bot.run('MTExMTU1NTY1MjYxMjAxODI0Ng.GCXFyj.QG7Q5ISzB_YgrtPwar3HnfC2Vf9hUqlt09df70')
+bot.run('')
