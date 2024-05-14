@@ -74,6 +74,10 @@ class CEmbed(discord.ui.View):
                 description="Anime Commands"
             ),
             discord.SelectOption(
+                label="Emotes",
+                description="Emote Commands"
+            ),
+            discord.SelectOption(
                 label="Utility",
                 description="Utility Commands"
             ),
@@ -121,10 +125,6 @@ class CEmbed(discord.ui.View):
             color=0x2f3136
         )
 
-
-
-        Funembed.add_field(name=f"{self.bot.get_application_command('hug').mention}", value="Send Hug To Another User", inline=False)
-        Funembed.add_field(name=f"{self.bot.get_application_command('slap').mention}", value="Slap Another User", inline=False)
         Funembed.add_field(name=f"{self.bot.get_application_command('8ball').mention}", value="Ask The 8ball A Question", inline=False)
         Funembed.add_field(name=f"{self.bot.get_application_command('coinflip').mention}", value="Flips A Coin", inline=False)
         Funembed.add_field(name=f"{self.bot.get_application_command('roll').mention}", value="Rolls A Dice", inline=False)
@@ -132,15 +132,7 @@ class CEmbed(discord.ui.View):
         Funembed.add_field(name=f"{self.bot.get_application_command('customquote').mention}", value="Create A Quote", inline=False)
         Funembed.add_field(name=f"{self.bot.get_application_command('moviequote').mention}", value="Get A Random Quote From Famous Series", inline=False)
         Funembed.add_field(name=f"{self.bot.get_application_command('gif').mention}", value="Sends A Gif", inline=False)
-        Funembed.add_field(name=f"{self.bot.get_application_command('dance').mention}", value="Dance With A User", inline=False)
-        Funembed.add_field(name=f"{self.bot.get_application_command('roast').mention}", value="Roast / Insult A User", inline=False)
-        Funembed.add_field(name=f"{self.bot.get_application_command('kill').mention}", value="Kill A User", inline=False)
-        Funembed.add_field(name=f"{self.bot.get_application_command('kiss').mention}", value="Kiss a User", inline=False)
-        Funembed.add_field(name=f"{self.bot.get_application_command('cuddle').mention}", value="Cuddle With a User", inline=False)
-        Funembed.add_field(name=f"{self.bot.get_application_command('pat').mention}", value="Pat a User", inline=False)
-        Funembed.add_field(name=f"{self.bot.get_application_command('simp').mention}", value="Simp a User", inline=False)
-        Funembed.add_field(name=f"{self.bot.get_application_command('punch').mention}", value="Punch a User", inline=False)
-        Funembed.add_field(name=f"{self.bot.get_application_command('murder').mention}", value="Murder a User", inline=False)
+
 
         Helpembed = discord.Embed(
             title="Help",
@@ -161,6 +153,15 @@ class CEmbed(discord.ui.View):
         Animeembed.add_field(name=f"{self.bot.get_application_command('settings').mention}", value="Enable/Disable Anime Updates", inline=False)
         Animeembed.add_field(name=f"{self.bot.get_application_command('waifu').mention}", value="Sends A Random Waifu", inline=False)
         Animeembed.add_field(name=f"{self.bot.get_application_command('nwaifu').mention}", value="Sends A Random NSFW Waifu", inline=False)
+
+        Emotesembed = discord.Embed(
+            title="Emotes",
+            description="Simple Emote Commands",
+            color=0x2f3136
+        )
+
+        Emotesembed.add_field(name=f"{self.bot.get_application_command('emotemenu').mention}", value="Sends The Emotes Menu", inline=False)
+
 
         Utilsembed = discord.Embed(
             title="Utility",
@@ -237,6 +238,9 @@ class CEmbed(discord.ui.View):
 
         elif select.values[0] == "Anime":
             await interaction.response.send_message(embed=Animeembed, ephemeral=True)
+
+        elif select.values[0] == "Emotes":
+            await interaction.response.send_message(embed=Emotesembed, ephemeral=True)
 
         elif select.values[0] == "Utility":
             await interaction.response.send_message(embed=Utilsembed, ephemeral=True)

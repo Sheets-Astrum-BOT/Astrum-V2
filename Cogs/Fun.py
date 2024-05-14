@@ -307,7 +307,7 @@ class GIF_Refresh(discord.ui.View):
         gif_urls = [entry['media_formats']['gif']['url'] for entry in data['results']]
         random_gif_url = random.choice(gif_urls)
 
-        await interaction.edit_message(content=random_gif_url, view=self)
+        await interaction.response.edit_message(content=random_gif_url, view=self)
 
 def setup(bot):
     bot.add_cog(Fun(bot))

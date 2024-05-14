@@ -282,5 +282,3 @@ bot.load_extension('Cogs.Moderation')
 bot.load_extension('Cogs.Information')
 bot.load_extension('Cogs.Entertainment')
 
-
-bot.run('')
