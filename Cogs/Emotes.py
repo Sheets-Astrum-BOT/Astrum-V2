@@ -7,13 +7,13 @@ from urllib.parse import quote
 from discord.ext import commands
 
 
-def get_gif(query):
-
+async def get_gif(query):
     api_key = "AIzaSyBadJ6mJ2zUDmZnQBoXQqjFjy6RFYgnpEc"
     url = f"https://tenor.googleapis.com/v2/search?q={query}&key={api_key}"
 
-    response = requests.get(url)
-    data = response.json()
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url) as response:
+            data = await response.json()
 
     gif_urls = [entry["media_formats"]["gif"]["url"] for entry in data["results"]]
     random_gif_url = random.choice(gif_urls)
@@ -41,7 +41,7 @@ class Emotes(commands.Cog):
         embed.add_field(name="\u200b", value=f"It Dealt {damage} Damage", inline=False)
         embed.set_footer(text="Ouuch! Did It Hurt ?")
 
-        await ctx.respond(embed=embed)
+        await ctx.respond(f"{user.mention}",embed=embed)
 
     @commands.slash_command(name="hug", description="Hug A User")
     async def hug(self, ctx, user: discord.Member):
@@ -57,7 +57,8 @@ class Emotes(commands.Cog):
 
         embed.set_image(url=gif)
 
-        await ctx.respond(embed=embed)
+        await ctx.respond(f"{user.mention}",embed=embed)
+
 
     @commands.slash_command(name="kill", description="Kill A User")
     async def kill(self, ctx, user: discord.Member):
@@ -72,7 +73,8 @@ class Emotes(commands.Cog):
         embed.add_field(name="\u200b", value=f"It Dealt Infinite Damage", inline=False)
         embed.set_footer(text="RIP !")
 
-        await ctx.respond(embed=embed)
+        await ctx.respond(f"{user.mention}",embed=embed)
+
 
     @commands.slash_command(name="pat", description="Pat A User")
     async def pat(self, ctx, user: discord.Member):
@@ -87,7 +89,8 @@ class Emotes(commands.Cog):
         embed.add_field(name="\u200b", value="That's So Cute !", inline=False)
         embed.set_footer(text="You Deserve It !")
 
-        await ctx.respond(embed=embed)
+        await ctx.respond(f"{user.mention}",embed=embed)
+
 
     @commands.slash_command(name="kiss", description="Kiss A User")
     async def kiss(self, ctx, user: discord.Member):
@@ -103,7 +106,8 @@ class Emotes(commands.Cog):
         embed.add_field(name="\u200b", value="That's So Romantic !", inline=False)
         embed.set_footer(text="You're So Sweet !")
 
-        await ctx.respond(embed=embed)
+        await ctx.respond(f"{user.mention}",embed=embed)
+
 
     @commands.slash_command(name="cry", description="Cry")
     async def cry(self, ctx):
@@ -116,7 +120,8 @@ class Emotes(commands.Cog):
         embed.add_field(name="\u200b", value="Don't Cry !", inline=False)
         embed.set_footer(text="It's Okay !")
 
-        await ctx.respond(embed=embed)
+        await ctx.respond(f"{ctx.author.mention}",embed=embed)
+
 
     @commands.slash_command(name="punch", description="Puch a User")
     async def punch(self, ctx, user: discord.Member):
@@ -132,7 +137,8 @@ class Emotes(commands.Cog):
         embed.add_field(name="\u200b", value="It Dealt 100 Damage", inline=False)
         embed.set_footer(text="Ouch !")
 
-        await ctx.respond(embed=embed)
+        await ctx.respond(f"{user.mention}",embed=embed)
+
 
     @commands.slash_command(name="bully", description="Bully A User")
     async def bully(self, ctx, user: discord.Member):
@@ -148,7 +154,8 @@ class Emotes(commands.Cog):
         embed.add_field(name="\u200b", value="That's Not Nice !", inline=False)
         embed.set_footer(text="Stop Bullying !")
 
-        await ctx.respond(embed=embed)
+        await ctx.respond(f"{user.mention}",embed=embed)
+
 
     @commands.slash_command(name="bite", description="Bite A User")
     async def bite(self, ctx, user: discord.Member):
@@ -163,7 +170,8 @@ class Emotes(commands.Cog):
         embed.add_field(name="\u200b", value="It Dealt 50 Damage", inline=False)
         embed.set_footer(text="Ouch !")
 
-        await ctx.respond(embed=embed)
+        await ctx.respond(f"{user.mention}",embed=embed)
+
 
     @commands.slash_command(name="lick", description="Lick A User")
     async def lick(self, ctx, user: discord.Member):
@@ -178,7 +186,8 @@ class Emotes(commands.Cog):
         embed.add_field(name="\u200b", value="That's So Weird !", inline=False)
         embed.set_footer(text="You're So Strange !")
 
-        await ctx.respond(embed=embed)
+        await ctx.respond(f"{user.mention}",embed=embed)
+
 
     @commands.slash_command(name="cuddle", description="Cuddle A User")
     async def cuddle(self, ctx, user: discord.Member):
@@ -194,7 +203,8 @@ class Emotes(commands.Cog):
         embed.add_field(name="\u200b", value="That's So Warm !", inline=False)
         embed.set_footer(text="You're So Sweet !")
 
-        await ctx.respond(embed=embed)
+        await ctx.respond(f"{user.mention}",embed=embed)
+
 
     @commands.slash_command(name="dance", description="Dance With A User")
     async def dance(self, ctx, user: discord.Member):
@@ -210,7 +220,8 @@ class Emotes(commands.Cog):
         embed.add_field(name="\u200b", value="That's So Fun !", inline=False)
         embed.set_footer(text="Let's Dance !")
 
-        await ctx.respond(embed=embed)
+        await ctx.respond(f"{user.mention}",embed=embed)
+
 
     @commands.slash_command(name="highfive", description="Highfive A User")
     async def highfive(self, ctx, user: discord.Member):
@@ -226,7 +237,8 @@ class Emotes(commands.Cog):
         embed.add_field(name="\u200b", value="That's So Cool !", inline=False)
         embed.set_footer(text="You're So Awesome !")
 
-        await ctx.respond(embed=embed)
+        await ctx.respond(f"{user.mention}",embed=embed)
+
 
     @commands.slash_command(name="handhold", description="Hold Hands With A User")
     async def handhold(self, ctx, user: discord.Member):
@@ -242,7 +254,8 @@ class Emotes(commands.Cog):
         embed.add_field(name="\u200b", value="That's So Sweet !", inline=False)
         embed.set_footer(text="You're So Lovely !")
 
-        await ctx.respond(embed=embed)
+        await ctx.respond(f"{user.mention}",embed=embed)
+
 
     @commands.slash_command(name="smile", description="Smile")
     async def smile(self, ctx):
@@ -255,7 +268,8 @@ class Emotes(commands.Cog):
         embed.add_field(name="\u200b", value="That's So Cute !", inline=False)
         embed.set_footer(text="You're So Adorable !")
 
-        await ctx.respond(embed=embed)
+        await ctx.respond(f"{ctx.author.mention}",embed=embed)
+
 
     @commands.slash_command(name="laugh", description="Laugh")
     async def laugh(self, ctx):
@@ -268,7 +282,8 @@ class Emotes(commands.Cog):
         embed.add_field(name="\u200b", value="That's So Funny !", inline=False)
         embed.set_footer(text="You're So Hilarious !")
 
-        await ctx.respond(embed=embed)
+        await ctx.respond(f"{ctx.author.mention}",embed=embed)
+
 
     @commands.slash_command(name="blush", description="Blush")
     async def blush(self, ctx):
@@ -283,7 +298,8 @@ class Emotes(commands.Cog):
         embed.add_field(name="\u200b", value="That's So Cute !", inline=False)
         embed.set_footer(text="You're So Shy !")
 
-        await ctx.respond(embed=embed)
+        await ctx.respond(f"{ctx.author.mention}",embed=embed)
+
 
     @commands.slash_command(name="confused", description="Confused")
     async def confused(self, ctx):
@@ -298,7 +314,8 @@ class Emotes(commands.Cog):
         embed.add_field(name="\u200b", value="That's So Weird !", inline=False)
         embed.set_footer(text="You're So Strange !")
 
-        await ctx.respond(embed=embed)
+        await ctx.respond(f"{ctx.author.mention}",embed=embed)
+
 
     @commands.slash_command(name="angry", description="Angry")
     async def angry(self, ctx):
@@ -313,7 +330,8 @@ class Emotes(commands.Cog):
         embed.add_field(name="\u200b", value="That's So Scary !", inline=False)
         embed.set_footer(text="You're So Fierce !")
 
-        await ctx.respond(embed=embed)
+        await ctx.respond(f"{ctx.author.mention}",embed=embed)
+
 
     @commands.slash_command(name="sad", description="Sad")
     async def sad(self, ctx):
@@ -326,7 +344,8 @@ class Emotes(commands.Cog):
         embed.add_field(name="\u200b", value="That's So Heartbreaking !", inline=False)
         embed.set_footer(text="You're So Emotional !")
 
-        await ctx.respond(embed=embed)
+        await ctx.respond(f"{ctx.author.mention}",embed=embed)
+
 
     @commands.slash_command(name="happy", description="Happy")
     async def happy(self, ctx):
@@ -341,7 +360,8 @@ class Emotes(commands.Cog):
         embed.add_field(name="\u200b", value="That's So Joyful !", inline=False)
         embed.set_footer(text="You're So Cheerful !")
 
-        await ctx.respond(embed=embed)
+        await ctx.respond(f"{ctx.author.mention}",embed=embed)
+
 
     @commands.slash_command(name="surprised", description="Surprised")
     async def surprised(self, ctx):
@@ -356,7 +376,8 @@ class Emotes(commands.Cog):
         embed.add_field(name="\u200b", value="That's So Shocking !", inline=False)
         embed.set_footer(text="You're So Astonished !")
 
-        await ctx.respond(embed=embed)
+        await ctx.respond(f"{ctx.author.mention}",embed=embed)
+
 
     @commands.slash_command(name="scared", description="Scared")
     async def scared(self, ctx):
@@ -371,7 +392,8 @@ class Emotes(commands.Cog):
         embed.add_field(name="\u200b", value="That's So Terrifying !", inline=False)
         embed.set_footer(text="You're So Fearful !")
 
-        await ctx.respond(embed=embed)
+        await ctx.respond(f"{ctx.author.mention}",embed=embed)
+
 
     @commands.slash_command(name="sleep", description="Sleep")
     async def sleep(self, ctx):
@@ -386,7 +408,8 @@ class Emotes(commands.Cog):
         embed.add_field(name="\u200b", value="That's So Peaceful !", inline=False)
         embed.set_footer(text="You're So Relaxed !")
 
-        await ctx.respond(embed=embed)
+        await ctx.respond(f"{ctx.author.mention}",embed=embed)
+
 
     @commands.slash_command(name="eat", description="Eat")
     async def eat(self, ctx):
@@ -401,7 +424,8 @@ class Emotes(commands.Cog):
         embed.add_field(name="\u200b", value="That's So Delicious !", inline=False)
         embed.set_footer(text="You're So Hungry !")
 
-        await ctx.respond(embed=embed)
+        await ctx.respond(f"{ctx.author.mention}",embed=embed)
+
 
     @commands.slash_command(name="drink", description="Drink")
     async def drink(self, ctx):
@@ -416,7 +440,8 @@ class Emotes(commands.Cog):
         embed.add_field(name="\u200b", value="That's So Refreshing !", inline=False)
         embed.set_footer(text="You're So Thirsty !")
 
-        await ctx.respond(embed=embed)
+        await ctx.respond(f"{ctx.author.mention}",embed=embed)
+
 
     @commands.slash_command(name="think", description="Think")
     async def think(self, ctx):
@@ -431,7 +456,8 @@ class Emotes(commands.Cog):
         embed.add_field(name="\u200b", value="That's So Smart !", inline=False)
         embed.set_footer(text="You're So Intelligent !")
 
-        await ctx.respond(embed=embed)
+        await ctx.respond(f"{ctx.author.mention}",embed=embed)
+
 
     @commands.slash_command(name="write", description="Write")
     async def write(self, ctx):
@@ -446,7 +472,8 @@ class Emotes(commands.Cog):
         embed.add_field(name="\u200b", value="That's So Creative !", inline=False)
         embed.set_footer(text="You're So Artistic !")
 
-        await ctx.respond(embed=embed)
+        await ctx.respond(f"{ctx.author.mention}",embed=embed)
+
 
     @commands.slash_command(name="read", description="Read")
     async def read(self, ctx):
@@ -461,7 +488,8 @@ class Emotes(commands.Cog):
         embed.add_field(name="\u200b", value="That's So Interesting !", inline=False)
         embed.set_footer(text="You're So Curious !")
 
-        await ctx.respond(embed=embed)
+        await ctx.respond(f"{ctx.author.mention}",embed=embed)
+
 
     @commands.slash_command(name="sing", description="Sing")
     async def sing(self, ctx):
@@ -476,7 +504,8 @@ class Emotes(commands.Cog):
         embed.add_field(name="\u200b", value="That's So Beautiful !", inline=False)
         embed.set_footer(text="You're So Talented !")
 
-        await ctx.respond(embed=embed)
+        await ctx.respond(f"{ctx.author.mention}",embed=embed)
+
 
     @commands.slash_command(name="play", description="Play")
     async def play(self, ctx):
@@ -491,7 +520,7 @@ class Emotes(commands.Cog):
         embed.add_field(name="\u200b", value="That's So Fun !", inline=False)
         embed.set_footer(text="You're So Energetic !")
 
-        await ctx.respond(embed=embed)
+        await ctx.respond(f"{ctx.author.mention}",embed=embed)
 
     @commands.slash_command(name="work", description="Work")
     async def work(self, ctx):
@@ -506,7 +535,8 @@ class Emotes(commands.Cog):
         embed.add_field(name="\u200b", value="That's So Hardworking !", inline=False)
         embed.set_footer(text="You're So Dedicated !")
 
-        await ctx.respond(embed=embed)
+        await ctx.respond(f"{ctx.author.mention}",embed=embed)
+
 
     @commands.slash_command(name="study", description="Study")
     async def study(self, ctx):
@@ -521,7 +551,8 @@ class Emotes(commands.Cog):
         embed.add_field(name="\u200b", value="That's So Intelligent !", inline=False)
         embed.set_footer(text="You're So Smart !")
 
-        await ctx.respond(embed=embed)
+        await ctx.respond(f"{ctx.author.mention}",embed=embed)
+
 
     @commands.slash_command(name="exercise", description="Exercise")
     async def exercise(self, ctx):
@@ -536,7 +567,8 @@ class Emotes(commands.Cog):
         embed.add_field(name="\u200b", value="That's So Healthy !", inline=False)
         embed.set_footer(text="You're So Fit !")
 
-        await ctx.respond(embed=embed)
+        await ctx.respond(f"{ctx.author.mention}",embed=embed)
+
 
     @commands.slash_command(name="meditate", description="Meditate")
     async def meditate(self, ctx):
@@ -551,7 +583,7 @@ class Emotes(commands.Cog):
         embed.add_field(name="\u200b", value="That's So Peaceful !", inline=False)
         embed.set_footer(text="You're So Calm !")
 
-        await ctx.respond(embed=embed)
+        await ctx.respond(f"{ctx.author.mention}",embed=embed)
 
     @commands.slash_command(name="pray", description="Pray")
     async def pray(self, ctx):
@@ -566,7 +598,8 @@ class Emotes(commands.Cog):
         embed.add_field(name="\u200b", value="That's So Spiritual !", inline=False)
         embed.set_footer(text="You're So Religious !")
 
-        await ctx.respond(embed=embed)
+        await ctx.respond(f"{ctx.author.mention}",embed=embed)
+
 
     @commands.slash_command(name="curse", description="Curse A User")
     async def curse(self, ctx, user: discord.Member):
@@ -582,7 +615,8 @@ class Emotes(commands.Cog):
         embed.add_field(name="\u200b", value="That's So Mean !", inline=False)
         embed.set_footer(text="Stop Cursing !")
 
-        await ctx.respond(embed=embed)
+        await ctx.respond(f"{user.mention}",embed=embed)
+
 
     @commands.slash_command(name="bless", description="Bless A User")
     async def bless(self, ctx, user: discord.Member):
@@ -598,7 +632,8 @@ class Emotes(commands.Cog):
         embed.add_field(name="\u200b", value="That's So Kind !", inline=False)
         embed.set_footer(text="You're So Generous !")
 
-        await ctx.respond(embed=embed)
+        await ctx.respond(f"{user.mention}",embed=embed)
+
 
     @commands.slash_command(name="thank", description="Thank A User")
     async def thank(self, ctx, user: discord.Member):
@@ -614,7 +649,8 @@ class Emotes(commands.Cog):
         embed.add_field(name="\u200b", value="That's So Grateful !", inline=False)
         embed.set_footer(text="You're So Polite !")
 
-        await ctx.respond(embed=embed)
+        await ctx.respond(f"{user.mention}",embed=embed)
+
 
     @commands.slash_command(name="welcome", description="Welcome A User")
     async def welcome(self, ctx, user: discord.Member):
@@ -630,7 +666,8 @@ class Emotes(commands.Cog):
         embed.add_field(name="\u200b", value="That's So Warm !", inline=False)
         embed.set_footer(text="You're So Friendly !")
 
-        await ctx.respond(embed=embed)
+        await ctx.respond(f"{user.mention}",embed=embed)
+
 
     @commands.slash_command(name="bye", description="Say Bye To A User")
     async def bye(self, ctx, user: discord.Member):
@@ -646,7 +683,8 @@ class Emotes(commands.Cog):
         embed.add_field(name="\u200b", value="That's So Sad !", inline=False)
         embed.set_footer(text="You're So Emotional !")
 
-        await ctx.respond(embed=embed)
+        await ctx.respond(f"{user.mention}",embed=embed)
+
 
     @commands.slash_command(name="goodmorning", description="Say Good Morning")
     async def goodmorning(self, ctx):
@@ -661,7 +699,8 @@ class Emotes(commands.Cog):
         embed.add_field(name="\u200b", value="That's So Bright !", inline=False)
         embed.set_footer(text="You're So Cheerful !")
 
-        await ctx.respond(embed=embed)
+        await ctx.respond(f"{ctx.author.mention}",embed=embed)
+
 
     @commands.slash_command(name="goodnight", description="Say Good Night")
     async def goodnight(self, ctx):
@@ -676,7 +715,8 @@ class Emotes(commands.Cog):
         embed.add_field(name="\u200b", value="That's So Dark !", inline=False)
         embed.set_footer(text="You're So Sleepy !")
 
-        await ctx.respond(embed=embed)
+        await ctx.respond(f"{ctx.author.mention}",embed=embed)
+
 
     @commands.slash_command(name="emotemenu", description="Show Emote Menu")
     async def emotemenu(self, ctx):
