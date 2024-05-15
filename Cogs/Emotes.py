@@ -28,7 +28,7 @@ class Emotes(commands.Cog):
     @commands.slash_command(name="slap", description="Slap A User")
     async def slap(self, ctx, user: discord.Member):
 
-        gif = get_gif("anime_slap")
+        gif = await get_gif("anime_slap")
 
         embed = discord.Embed(
             title=f"{ctx.author.display_name} Slaps {user.display_name} Hard",
@@ -46,7 +46,7 @@ class Emotes(commands.Cog):
     @commands.slash_command(name="hug", description="Hug A User")
     async def hug(self, ctx, user: discord.Member):
 
-        gif = get_gif("anime_hug")
+        gif = await get_gif("anime_hug")
 
         embed = discord.Embed(
             title=f"{ctx.author.display_name} Hugs {user.display_name}", color=0x00FF00
@@ -63,7 +63,7 @@ class Emotes(commands.Cog):
     @commands.slash_command(name="kill", description="Kill A User")
     async def kill(self, ctx, user: discord.Member):
 
-        gif = get_gif("anime_kill")
+        gif = await get_gif("anime_kill")
 
         embed = discord.Embed(
             title=f"{ctx.author.display_name} Kills {user.display_name}", color=0x00FF00
@@ -79,7 +79,7 @@ class Emotes(commands.Cog):
     @commands.slash_command(name="pat", description="Pat A User")
     async def pat(self, ctx, user: discord.Member):
 
-        gif = get_gif("anime_pat")
+        gif = await get_gif("anime_pat")
 
         embed = discord.Embed(
             title=f"{ctx.author.display_name} Pats {user.display_name}", color=0x00FF00
@@ -95,7 +95,7 @@ class Emotes(commands.Cog):
     @commands.slash_command(name="kiss", description="Kiss A User")
     async def kiss(self, ctx, user: discord.Member):
 
-        gif = get_gif("anime_kiss")
+        gif = await get_gif("anime_kiss")
 
         embed = discord.Embed(
             title=f"{ctx.author.display_name} Kisses {user.display_name}",
@@ -112,7 +112,7 @@ class Emotes(commands.Cog):
     @commands.slash_command(name="cry", description="Cry")
     async def cry(self, ctx):
 
-        gif = get_gif("anime_cry")
+        gif = await get_gif("anime_cry")
 
         embed = discord.Embed(title=f"{ctx.author.display_name} Cries", color=0x00FF00)
         embed.set_image(url=gif)
@@ -126,7 +126,7 @@ class Emotes(commands.Cog):
     @commands.slash_command(name="punch", description="Puch a User")
     async def punch(self, ctx, user: discord.Member):
 
-        gif = get_gif("anime_punch")
+        gif = await get_gif("anime_punch")
 
         embed = discord.Embed(
             title=f"{ctx.author.display_name} Punches {user.display_name}",
@@ -143,7 +143,7 @@ class Emotes(commands.Cog):
     @commands.slash_command(name="bully", description="Bully A User")
     async def bully(self, ctx, user: discord.Member):
 
-        gif = get_gif("anime_bully")
+        gif = await get_gif("anime_bully")
 
         embed = discord.Embed(
             title=f"{ctx.author.display_name} Bullies {user.display_name}",
@@ -160,7 +160,7 @@ class Emotes(commands.Cog):
     @commands.slash_command(name="bite", description="Bite A User")
     async def bite(self, ctx, user: discord.Member):
 
-        gif = get_gif("anime_bite")
+        gif = await get_gif("anime_bite")
 
         embed = discord.Embed(
             title=f"{ctx.author.display_name} Bites {user.display_name}", color=0x00FF00
@@ -176,7 +176,7 @@ class Emotes(commands.Cog):
     @commands.slash_command(name="lick", description="Lick A User")
     async def lick(self, ctx, user: discord.Member):
 
-        gif = get_gif("anime_lick")
+        gif = await get_gif("anime_lick")
 
         embed = discord.Embed(
             title=f"{ctx.author.display_name} Licks {user.display_name}", color=0x00FF00
@@ -192,7 +192,7 @@ class Emotes(commands.Cog):
     @commands.slash_command(name="cuddle", description="Cuddle A User")
     async def cuddle(self, ctx, user: discord.Member):
 
-        gif = get_gif("anime_cuddle")
+        gif = await get_gif("anime_cuddle")
 
         embed = discord.Embed(
             title=f"{ctx.author.display_name} Cuddles {user.display_name}",
@@ -209,7 +209,7 @@ class Emotes(commands.Cog):
     @commands.slash_command(name="dance", description="Dance With A User")
     async def dance(self, ctx, user: discord.Member):
 
-        gif = get_gif("anime_dance")
+        gif = await get_gif("anime_dance")
 
         embed = discord.Embed(
             title=f"{ctx.author.display_name} Dances With {user.display_name}",
@@ -226,7 +226,7 @@ class Emotes(commands.Cog):
     @commands.slash_command(name="highfive", description="Highfive A User")
     async def highfive(self, ctx, user: discord.Member):
 
-        gif = get_gif("anime_highfive")
+        gif = await get_gif("anime_highfive")
 
         embed = discord.Embed(
             title=f"{ctx.author.display_name} Highfives {user.display_name}",
@@ -243,7 +243,7 @@ class Emotes(commands.Cog):
     @commands.slash_command(name="handhold", description="Hold Hands With A User")
     async def handhold(self, ctx, user: discord.Member):
 
-        gif = get_gif("anime_handhold")
+        gif = await get_gif("anime_handhold")
 
         embed = discord.Embed(
             title=f"{ctx.author.display_name} Holds Hands With {user.display_name}",
@@ -260,7 +260,7 @@ class Emotes(commands.Cog):
     @commands.slash_command(name="smile", description="Smile")
     async def smile(self, ctx):
 
-        gif = get_gif("anime_smile")
+        gif = await get_gif("anime_smile")
 
         embed = discord.Embed(title=f"{ctx.author.display_name} Smiles", color=0x00FF00)
         embed.set_image(url=gif)
@@ -274,7 +274,7 @@ class Emotes(commands.Cog):
     @commands.slash_command(name="laugh", description="Laugh")
     async def laugh(self, ctx):
 
-        gif = get_gif("anime_laugh")
+        gif = await get_gif("anime_laugh")
 
         embed = discord.Embed(title=f"{ctx.author.display_name} Laughs", color=0x00FF00)
         embed.set_image(url=gif)
@@ -288,7 +288,7 @@ class Emotes(commands.Cog):
     @commands.slash_command(name="blush", description="Blush")
     async def blush(self, ctx):
 
-        gif = get_gif("anime_blush")
+        gif = await get_gif("anime_blush")
 
         embed = discord.Embed(
             title=f"{ctx.author.display_name} Blushes", color=0x00FF00
@@ -304,7 +304,7 @@ class Emotes(commands.Cog):
     @commands.slash_command(name="confused", description="Confused")
     async def confused(self, ctx):
 
-        gif = get_gif("anime_confused")
+        gif = await get_gif("anime_confused")
 
         embed = discord.Embed(
             title=f"{ctx.author.display_name} Is Confused", color=0x00FF00
@@ -320,7 +320,7 @@ class Emotes(commands.Cog):
     @commands.slash_command(name="angry", description="Angry")
     async def angry(self, ctx):
 
-        gif = get_gif("anime_angry")
+        gif = await get_gif("anime_angry")
 
         embed = discord.Embed(
             title=f"{ctx.author.display_name} Is Angry", color=0x00FF00
@@ -336,7 +336,7 @@ class Emotes(commands.Cog):
     @commands.slash_command(name="sad", description="Sad")
     async def sad(self, ctx):
 
-        gif = get_gif("anime_sad")
+        gif = await get_gif("anime_sad")
 
         embed = discord.Embed(title=f"{ctx.author.display_name} Is Sad", color=0x00FF00)
         embed.set_image(url=gif)
@@ -350,7 +350,7 @@ class Emotes(commands.Cog):
     @commands.slash_command(name="happy", description="Happy")
     async def happy(self, ctx):
 
-        gif = get_gif("anime_happy")
+        gif = await get_gif("anime_happy")
 
         embed = discord.Embed(
             title=f"{ctx.author.display_name} Is Happy", color=0x00FF00
@@ -366,7 +366,7 @@ class Emotes(commands.Cog):
     @commands.slash_command(name="surprised", description="Surprised")
     async def surprised(self, ctx):
 
-        gif = get_gif("anime_surprised")
+        gif = await get_gif("anime_surprised")
 
         embed = discord.Embed(
             title=f"{ctx.author.display_name} Is Surprised", color=0x00FF00
@@ -382,7 +382,7 @@ class Emotes(commands.Cog):
     @commands.slash_command(name="scared", description="Scared")
     async def scared(self, ctx):
 
-        gif = get_gif("anime_scared")
+        gif = await get_gif("anime_scared")
 
         embed = discord.Embed(
             title=f"{ctx.author.display_name} Is Scared", color=0x00FF00
@@ -398,7 +398,7 @@ class Emotes(commands.Cog):
     @commands.slash_command(name="sleep", description="Sleep")
     async def sleep(self, ctx):
 
-        gif = get_gif("anime_sleep")
+        gif = await get_gif("anime_sleep")
 
         embed = discord.Embed(
             title=f"{ctx.author.display_name} Is Sleeping", color=0x00FF00
@@ -414,7 +414,7 @@ class Emotes(commands.Cog):
     @commands.slash_command(name="eat", description="Eat")
     async def eat(self, ctx):
 
-        gif = get_gif("anime_eat")
+        gif = await get_gif("anime_eat")
 
         embed = discord.Embed(
             title=f"{ctx.author.display_name} Is Eating", color=0x00FF00
@@ -430,7 +430,7 @@ class Emotes(commands.Cog):
     @commands.slash_command(name="drink", description="Drink")
     async def drink(self, ctx):
 
-        gif = get_gif("anime_drink")
+        gif = await get_gif("anime_drink")
 
         embed = discord.Embed(
             title=f"{ctx.author.display_name} Is Drinking", color=0x00FF00
@@ -446,7 +446,7 @@ class Emotes(commands.Cog):
     @commands.slash_command(name="think", description="Think")
     async def think(self, ctx):
 
-        gif = get_gif("anime_think")
+        gif = await get_gif("anime_think")
 
         embed = discord.Embed(
             title=f"{ctx.author.display_name} Is Thinking", color=0x00FF00
@@ -462,7 +462,7 @@ class Emotes(commands.Cog):
     @commands.slash_command(name="write", description="Write")
     async def write(self, ctx):
 
-        gif = get_gif("anime_write")
+        gif = await get_gif("anime_write")
 
         embed = discord.Embed(
             title=f"{ctx.author.display_name} Is Writing", color=0x00FF00
@@ -478,7 +478,7 @@ class Emotes(commands.Cog):
     @commands.slash_command(name="read", description="Read")
     async def read(self, ctx):
 
-        gif = get_gif("anime_read")
+        gif = await get_gif("anime_read")
 
         embed = discord.Embed(
             title=f"{ctx.author.display_name} Is Reading", color=0x00FF00
@@ -494,7 +494,7 @@ class Emotes(commands.Cog):
     @commands.slash_command(name="sing", description="Sing")
     async def sing(self, ctx):
 
-        gif = get_gif("anime_sing")
+        gif = await get_gif("anime_sing")
 
         embed = discord.Embed(
             title=f"{ctx.author.display_name} Is Singing", color=0x00FF00
@@ -510,7 +510,7 @@ class Emotes(commands.Cog):
     @commands.slash_command(name="play", description="Play")
     async def play(self, ctx):
 
-        gif = get_gif("anime_play")
+        gif = await get_gif("anime_play")
 
         embed = discord.Embed(
             title=f"{ctx.author.display_name} Is Playing", color=0x00FF00
@@ -525,7 +525,7 @@ class Emotes(commands.Cog):
     @commands.slash_command(name="work", description="Work")
     async def work(self, ctx):
 
-        gif = get_gif("anime_work")
+        gif = await get_gif("anime_work")
 
         embed = discord.Embed(
             title=f"{ctx.author.display_name} Is Working", color=0x00FF00
@@ -541,7 +541,7 @@ class Emotes(commands.Cog):
     @commands.slash_command(name="study", description="Study")
     async def study(self, ctx):
 
-        gif = get_gif("anime_study")
+        gif = await get_gif("anime_study")
 
         embed = discord.Embed(
             title=f"{ctx.author.display_name} Is Studying", color=0x00FF00
@@ -557,7 +557,7 @@ class Emotes(commands.Cog):
     @commands.slash_command(name="exercise", description="Exercise")
     async def exercise(self, ctx):
 
-        gif = get_gif("anime_exercise")
+        gif = await get_gif("anime_exercise")
 
         embed = discord.Embed(
             title=f"{ctx.author.display_name} Is Exercising", color=0x00FF00
@@ -573,7 +573,7 @@ class Emotes(commands.Cog):
     @commands.slash_command(name="meditate", description="Meditate")
     async def meditate(self, ctx):
 
-        gif = get_gif("anime_meditate")
+        gif = await get_gif("anime_meditate")
 
         embed = discord.Embed(
             title=f"{ctx.author.display_name} Is Meditating", color=0x00FF00
@@ -588,7 +588,7 @@ class Emotes(commands.Cog):
     @commands.slash_command(name="pray", description="Pray")
     async def pray(self, ctx):
 
-        gif = get_gif("anime_pray")
+        gif = await get_gif("anime_pray")
 
         embed = discord.Embed(
             title=f"{ctx.author.display_name} Is Praying", color=0x00FF00
@@ -604,7 +604,7 @@ class Emotes(commands.Cog):
     @commands.slash_command(name="curse", description="Curse A User")
     async def curse(self, ctx, user: discord.Member):
 
-        gif = get_gif("anime_curse")
+        gif = await get_gif("anime_curse")
 
         embed = discord.Embed(
             title=f"{ctx.author.display_name} Curses {user.display_name}",
@@ -621,7 +621,7 @@ class Emotes(commands.Cog):
     @commands.slash_command(name="bless", description="Bless A User")
     async def bless(self, ctx, user: discord.Member):
 
-        gif = get_gif("anime_bless")
+        gif = await get_gif("anime_bless")
 
         embed = discord.Embed(
             title=f"{ctx.author.display_name} Blesses {user.display_name}",
@@ -638,7 +638,7 @@ class Emotes(commands.Cog):
     @commands.slash_command(name="thank", description="Thank A User")
     async def thank(self, ctx, user: discord.Member):
 
-        gif = get_gif("anime_thank")
+        gif = await get_gif("anime_thank")
 
         embed = discord.Embed(
             title=f"{ctx.author.display_name} Thanks {user.display_name}",
@@ -655,7 +655,7 @@ class Emotes(commands.Cog):
     @commands.slash_command(name="welcome", description="Welcome A User")
     async def welcome(self, ctx, user: discord.Member):
 
-        gif = get_gif("anime_welcome")
+        gif = await get_gif("anime_welcome")
 
         embed = discord.Embed(
             title=f"{ctx.author.display_name} Welcomes {user.display_name}",
@@ -672,7 +672,7 @@ class Emotes(commands.Cog):
     @commands.slash_command(name="bye", description="Say Bye To A User")
     async def bye(self, ctx, user: discord.Member):
 
-        gif = get_gif("anime_bye")
+        gif = await get_gif("anime_bye")
 
         embed = discord.Embed(
             title=f"{ctx.author.display_name} Says Bye To {user.display_name}",
@@ -689,7 +689,7 @@ class Emotes(commands.Cog):
     @commands.slash_command(name="goodmorning", description="Say Good Morning")
     async def goodmorning(self, ctx):
 
-        gif = get_gif("anime_goodmorning")
+        gif = await get_gif("anime_goodmorning")
 
         embed = discord.Embed(
             title=f"{ctx.author.display_name} Says Good Morning", color=0x00FF00
@@ -705,7 +705,7 @@ class Emotes(commands.Cog):
     @commands.slash_command(name="goodnight", description="Say Good Night")
     async def goodnight(self, ctx):
 
-        gif = get_gif("anime_goodnight")
+        gif = await get_gif("anime_goodnight")
 
         embed = discord.Embed(
             title=f"{ctx.author.display_name} Says Good Night", color=0x00FF00
