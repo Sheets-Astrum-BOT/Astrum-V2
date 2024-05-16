@@ -32,7 +32,7 @@ class Emotes(commands.Cog):
 
         embed = discord.Embed(
             title=f"{ctx.author.display_name} Slaps {user.display_name} Hard",
-            color=0x00FF00,
+            color=0xBED7DC,
         )
         embed.set_image(url=gif)
 
@@ -49,7 +49,7 @@ class Emotes(commands.Cog):
         gif = await get_gif("anime_hug")
 
         embed = discord.Embed(
-            title=f"{ctx.author.display_name} Hugs {user.display_name}", color=0x00FF00
+            title=f"{ctx.author.display_name} Hugs {user.display_name}", color=0xBED7DC
         )
 
         embed.add_field(name="\u200b", value="Awwww !", inline=False)
@@ -66,7 +66,7 @@ class Emotes(commands.Cog):
         gif = await get_gif("anime_kill")
 
         embed = discord.Embed(
-            title=f"{ctx.author.display_name} Kills {user.display_name}", color=0x00FF00
+            title=f"{ctx.author.display_name} Kills {user.display_name}", color=0xBED7DC
         )
         embed.set_image(url=gif)
 
@@ -82,7 +82,7 @@ class Emotes(commands.Cog):
         gif = await get_gif("anime_pat")
 
         embed = discord.Embed(
-            title=f"{ctx.author.display_name} Pats {user.display_name}", color=0x00FF00
+            title=f"{ctx.author.display_name} Pats {user.display_name}", color=0xBED7DC
         )
         embed.set_image(url=gif)
 
@@ -99,7 +99,7 @@ class Emotes(commands.Cog):
 
         embed = discord.Embed(
             title=f"{ctx.author.display_name} Kisses {user.display_name}",
-            color=0x00FF00,
+            color=0xBED7DC,
         )
         embed.set_image(url=gif)
 
@@ -114,13 +114,13 @@ class Emotes(commands.Cog):
 
         gif = await get_gif("anime_cry")
 
-        embed = discord.Embed(title=f"{ctx.author.display_name} Cries", color=0x00FF00)
+        embed = discord.Embed(title=f"{ctx.author.display_name} Cries", color=0xBED7DC)
         embed.set_image(url=gif)
 
         embed.add_field(name="\u200b", value="Don't Cry !", inline=False)
         embed.set_footer(text="It's Okay !")
 
-        await ctx.respond(f"{ctx.author.mention}",embed=embed)
+        await ctx.respond(embed=embed)
 
 
     @commands.slash_command(name="punch", description="Puch a User")
@@ -130,7 +130,7 @@ class Emotes(commands.Cog):
 
         embed = discord.Embed(
             title=f"{ctx.author.display_name} Punches {user.display_name}",
-            color=0x00FF00,
+            color=0xBED7DC,
         )
         embed.set_image(url=gif)
 
@@ -147,7 +147,7 @@ class Emotes(commands.Cog):
 
         embed = discord.Embed(
             title=f"{ctx.author.display_name} Bullies {user.display_name}",
-            color=0x00FF00,
+            color=0xBED7DC,
         )
         embed.set_image(url=gif)
 
@@ -163,7 +163,7 @@ class Emotes(commands.Cog):
         gif = await get_gif("anime_bite")
 
         embed = discord.Embed(
-            title=f"{ctx.author.display_name} Bites {user.display_name}", color=0x00FF00
+            title=f"{ctx.author.display_name} Bites {user.display_name}", color=0xBED7DC
         )
         embed.set_image(url=gif)
 
@@ -179,7 +179,7 @@ class Emotes(commands.Cog):
         gif = await get_gif("anime_lick")
 
         embed = discord.Embed(
-            title=f"{ctx.author.display_name} Licks {user.display_name}", color=0x00FF00
+            title=f"{ctx.author.display_name} Licks {user.display_name}", color=0xBED7DC
         )
         embed.set_image(url=gif)
 
@@ -196,7 +196,7 @@ class Emotes(commands.Cog):
 
         embed = discord.Embed(
             title=f"{ctx.author.display_name} Cuddles {user.display_name}",
-            color=0x00FF00,
+            color=0xBED7DC,
         )
         embed.set_image(url=gif)
 
@@ -213,7 +213,7 @@ class Emotes(commands.Cog):
 
         embed = discord.Embed(
             title=f"{ctx.author.display_name} Dances With {user.display_name}",
-            color=0x00FF00,
+            color=0xBED7DC,
         )
         embed.set_image(url=gif)
 
@@ -230,7 +230,7 @@ class Emotes(commands.Cog):
 
         embed = discord.Embed(
             title=f"{ctx.author.display_name} Highfives {user.display_name}",
-            color=0x00FF00,
+            color=0xBED7DC,
         )
         embed.set_image(url=gif)
 
@@ -247,7 +247,7 @@ class Emotes(commands.Cog):
 
         embed = discord.Embed(
             title=f"{ctx.author.display_name} Holds Hands With {user.display_name}",
-            color=0x00FF00,
+            color=0xBED7DC,
         )
         embed.set_image(url=gif)
 
@@ -262,13 +262,13 @@ class Emotes(commands.Cog):
 
         gif = await get_gif("anime_smile")
 
-        embed = discord.Embed(title=f"{ctx.author.display_name} Smiles", color=0x00FF00)
+        embed = discord.Embed(title=f"{ctx.author.display_name} Smiles", color=0xBED7DC)
         embed.set_image(url=gif)
 
         embed.add_field(name="\u200b", value="That's So Cute !", inline=False)
         embed.set_footer(text="You're So Adorable !")
 
-        await ctx.respond(f"{ctx.author.mention}",embed=embed)
+        await ctx.respond(embed=embed)
 
 
     @commands.slash_command(name="laugh", description="Laugh")
@@ -276,13 +276,14 @@ class Emotes(commands.Cog):
 
         gif = await get_gif("anime_laugh")
 
-        embed = discord.Embed(title=f"{ctx.author.display_name} Laughs", color=0x00FF00)
+        embed = discord.Embed(title=f"{ctx.author.display_name} Laughs", color=0xBED7DC)
         embed.set_image(url=gif)
 
         embed.add_field(name="\u200b", value="That's So Funny !", inline=False)
         embed.set_footer(text="You're So Hilarious !")
 
-        await ctx.respond(f"{ctx.author.mention}",embed=embed)
+        await ctx.respond(embed=embed)
+
 
 
     @commands.slash_command(name="blush", description="Blush")
@@ -291,14 +292,14 @@ class Emotes(commands.Cog):
         gif = await get_gif("anime_blush")
 
         embed = discord.Embed(
-            title=f"{ctx.author.display_name} Blushes", color=0x00FF00
+            title=f"{ctx.author.display_name} Blushes", color=0xBED7DC
         )
         embed.set_image(url=gif)
 
         embed.add_field(name="\u200b", value="That's So Cute !", inline=False)
         embed.set_footer(text="You're So Shy !")
 
-        await ctx.respond(f"{ctx.author.mention}",embed=embed)
+        await ctx.respond(embed=embed)
 
 
     @commands.slash_command(name="confused", description="Confused")
@@ -307,14 +308,14 @@ class Emotes(commands.Cog):
         gif = await get_gif("anime_confused")
 
         embed = discord.Embed(
-            title=f"{ctx.author.display_name} Is Confused", color=0x00FF00
+            title=f"{ctx.author.display_name} Is Confused", color=0xBED7DC
         )
         embed.set_image(url=gif)
 
         embed.add_field(name="\u200b", value="That's So Weird !", inline=False)
         embed.set_footer(text="You're So Strange !")
 
-        await ctx.respond(f"{ctx.author.mention}",embed=embed)
+        await ctx.respond(embed=embed)
 
 
     @commands.slash_command(name="angry", description="Angry")
@@ -323,14 +324,14 @@ class Emotes(commands.Cog):
         gif = await get_gif("anime_angry")
 
         embed = discord.Embed(
-            title=f"{ctx.author.display_name} Is Angry", color=0x00FF00
+            title=f"{ctx.author.display_name} Is Angry", color=0xBED7DC
         )
         embed.set_image(url=gif)
 
         embed.add_field(name="\u200b", value="That's So Scary !", inline=False)
         embed.set_footer(text="You're So Fierce !")
 
-        await ctx.respond(f"{ctx.author.mention}",embed=embed)
+        await ctx.respond(embed=embed)
 
 
     @commands.slash_command(name="sad", description="Sad")
@@ -338,13 +339,13 @@ class Emotes(commands.Cog):
 
         gif = await get_gif("anime_sad")
 
-        embed = discord.Embed(title=f"{ctx.author.display_name} Is Sad", color=0x00FF00)
+        embed = discord.Embed(title=f"{ctx.author.display_name} Is Sad", color=0xBED7DC)
         embed.set_image(url=gif)
 
         embed.add_field(name="\u200b", value="That's So Heartbreaking !", inline=False)
         embed.set_footer(text="You're So Emotional !")
 
-        await ctx.respond(f"{ctx.author.mention}",embed=embed)
+        await ctx.respond(embed=embed)
 
 
     @commands.slash_command(name="happy", description="Happy")
@@ -353,14 +354,14 @@ class Emotes(commands.Cog):
         gif = await get_gif("anime_happy")
 
         embed = discord.Embed(
-            title=f"{ctx.author.display_name} Is Happy", color=0x00FF00
+            title=f"{ctx.author.display_name} Is Happy", color=0xBED7DC
         )
         embed.set_image(url=gif)
 
         embed.add_field(name="\u200b", value="That's So Joyful !", inline=False)
         embed.set_footer(text="You're So Cheerful !")
 
-        await ctx.respond(f"{ctx.author.mention}",embed=embed)
+        await ctx.respond(embed=embed)
 
 
     @commands.slash_command(name="surprised", description="Surprised")
@@ -369,14 +370,14 @@ class Emotes(commands.Cog):
         gif = await get_gif("anime_surprised")
 
         embed = discord.Embed(
-            title=f"{ctx.author.display_name} Is Surprised", color=0x00FF00
+            title=f"{ctx.author.display_name} Is Surprised", color=0xBED7DC
         )
         embed.set_image(url=gif)
 
         embed.add_field(name="\u200b", value="That's So Shocking !", inline=False)
         embed.set_footer(text="You're So Astonished !")
 
-        await ctx.respond(f"{ctx.author.mention}",embed=embed)
+        await ctx.respond(embed=embed)
 
 
     @commands.slash_command(name="scared", description="Scared")
@@ -385,14 +386,14 @@ class Emotes(commands.Cog):
         gif = await get_gif("anime_scared")
 
         embed = discord.Embed(
-            title=f"{ctx.author.display_name} Is Scared", color=0x00FF00
+            title=f"{ctx.author.display_name} Is Scared", color=0xBED7DC
         )
         embed.set_image(url=gif)
 
         embed.add_field(name="\u200b", value="That's So Terrifying !", inline=False)
         embed.set_footer(text="You're So Fearful !")
 
-        await ctx.respond(f"{ctx.author.mention}",embed=embed)
+        await ctx.respond(embed=embed)
 
 
     @commands.slash_command(name="sleep", description="Sleep")
@@ -401,14 +402,14 @@ class Emotes(commands.Cog):
         gif = await get_gif("anime_sleep")
 
         embed = discord.Embed(
-            title=f"{ctx.author.display_name} Is Sleeping", color=0x00FF00
+            title=f"{ctx.author.display_name} Is Sleeping", color=0xBED7DC
         )
         embed.set_image(url=gif)
 
         embed.add_field(name="\u200b", value="That's So Peaceful !", inline=False)
         embed.set_footer(text="You're So Relaxed !")
 
-        await ctx.respond(f"{ctx.author.mention}",embed=embed)
+        await ctx.respond(embed=embed)
 
 
     @commands.slash_command(name="eat", description="Eat")
@@ -417,14 +418,14 @@ class Emotes(commands.Cog):
         gif = await get_gif("anime_eat")
 
         embed = discord.Embed(
-            title=f"{ctx.author.display_name} Is Eating", color=0x00FF00
+            title=f"{ctx.author.display_name} Is Eating", color=0xBED7DC
         )
         embed.set_image(url=gif)
 
         embed.add_field(name="\u200b", value="That's So Delicious !", inline=False)
         embed.set_footer(text="You're So Hungry !")
 
-        await ctx.respond(f"{ctx.author.mention}",embed=embed)
+        await ctx.respond(embed=embed)
 
 
     @commands.slash_command(name="drink", description="Drink")
@@ -433,14 +434,14 @@ class Emotes(commands.Cog):
         gif = await get_gif("anime_drink")
 
         embed = discord.Embed(
-            title=f"{ctx.author.display_name} Is Drinking", color=0x00FF00
+            title=f"{ctx.author.display_name} Is Drinking", color=0xBED7DC
         )
         embed.set_image(url=gif)
 
         embed.add_field(name="\u200b", value="That's So Refreshing !", inline=False)
         embed.set_footer(text="You're So Thirsty !")
 
-        await ctx.respond(f"{ctx.author.mention}",embed=embed)
+        await ctx.respond(embed=embed)
 
 
     @commands.slash_command(name="think", description="Think")
@@ -449,14 +450,14 @@ class Emotes(commands.Cog):
         gif = await get_gif("anime_think")
 
         embed = discord.Embed(
-            title=f"{ctx.author.display_name} Is Thinking", color=0x00FF00
+            title=f"{ctx.author.display_name} Is Thinking", color=0xBED7DC
         )
         embed.set_image(url=gif)
 
         embed.add_field(name="\u200b", value="That's So Smart !", inline=False)
         embed.set_footer(text="You're So Intelligent !")
 
-        await ctx.respond(f"{ctx.author.mention}",embed=embed)
+        await ctx.respond(embed=embed)
 
 
     @commands.slash_command(name="write", description="Write")
@@ -465,14 +466,14 @@ class Emotes(commands.Cog):
         gif = await get_gif("anime_write")
 
         embed = discord.Embed(
-            title=f"{ctx.author.display_name} Is Writing", color=0x00FF00
+            title=f"{ctx.author.display_name} Is Writing", color=0xBED7DC
         )
         embed.set_image(url=gif)
 
         embed.add_field(name="\u200b", value="That's So Creative !", inline=False)
         embed.set_footer(text="You're So Artistic !")
 
-        await ctx.respond(f"{ctx.author.mention}",embed=embed)
+        await ctx.respond(embed=embed)
 
 
     @commands.slash_command(name="read", description="Read")
@@ -481,14 +482,14 @@ class Emotes(commands.Cog):
         gif = await get_gif("anime_read")
 
         embed = discord.Embed(
-            title=f"{ctx.author.display_name} Is Reading", color=0x00FF00
+            title=f"{ctx.author.display_name} Is Reading", color=0xBED7DC
         )
         embed.set_image(url=gif)
 
         embed.add_field(name="\u200b", value="That's So Interesting !", inline=False)
         embed.set_footer(text="You're So Curious !")
 
-        await ctx.respond(f"{ctx.author.mention}",embed=embed)
+        await ctx.respond(embed=embed)
 
 
     @commands.slash_command(name="sing", description="Sing")
@@ -497,14 +498,14 @@ class Emotes(commands.Cog):
         gif = await get_gif("anime_sing")
 
         embed = discord.Embed(
-            title=f"{ctx.author.display_name} Is Singing", color=0x00FF00
+            title=f"{ctx.author.display_name} Is Singing", color=0xBED7DC
         )
         embed.set_image(url=gif)
 
         embed.add_field(name="\u200b", value="That's So Beautiful !", inline=False)
         embed.set_footer(text="You're So Talented !")
 
-        await ctx.respond(f"{ctx.author.mention}",embed=embed)
+        await ctx.respond(embed=embed)
 
 
     @commands.slash_command(name="play", description="Play")
@@ -513,14 +514,14 @@ class Emotes(commands.Cog):
         gif = await get_gif("anime_play")
 
         embed = discord.Embed(
-            title=f"{ctx.author.display_name} Is Playing", color=0x00FF00
+            title=f"{ctx.author.display_name} Is Playing", color=0xBED7DC
         )
         embed.set_image(url=gif)
 
         embed.add_field(name="\u200b", value="That's So Fun !", inline=False)
         embed.set_footer(text="You're So Energetic !")
 
-        await ctx.respond(f"{ctx.author.mention}",embed=embed)
+        await ctx.respond(embed=embed)
 
     @commands.slash_command(name="work", description="Work")
     async def work(self, ctx):
@@ -528,14 +529,14 @@ class Emotes(commands.Cog):
         gif = await get_gif("anime_work")
 
         embed = discord.Embed(
-            title=f"{ctx.author.display_name} Is Working", color=0x00FF00
+            title=f"{ctx.author.display_name} Is Working", color=0xBED7DC
         )
         embed.set_image(url=gif)
 
         embed.add_field(name="\u200b", value="That's So Hardworking !", inline=False)
         embed.set_footer(text="You're So Dedicated !")
 
-        await ctx.respond(f"{ctx.author.mention}",embed=embed)
+        await ctx.respond(embed=embed)
 
 
     @commands.slash_command(name="study", description="Study")
@@ -544,14 +545,14 @@ class Emotes(commands.Cog):
         gif = await get_gif("anime_study")
 
         embed = discord.Embed(
-            title=f"{ctx.author.display_name} Is Studying", color=0x00FF00
+            title=f"{ctx.author.display_name} Is Studying", color=0xBED7DC
         )
         embed.set_image(url=gif)
 
         embed.add_field(name="\u200b", value="That's So Intelligent !", inline=False)
         embed.set_footer(text="You're So Smart !")
 
-        await ctx.respond(f"{ctx.author.mention}",embed=embed)
+        await ctx.respond(embed=embed)
 
 
     @commands.slash_command(name="exercise", description="Exercise")
@@ -560,14 +561,14 @@ class Emotes(commands.Cog):
         gif = await get_gif("anime_exercise")
 
         embed = discord.Embed(
-            title=f"{ctx.author.display_name} Is Exercising", color=0x00FF00
+            title=f"{ctx.author.display_name} Is Exercising", color=0xBED7DC
         )
         embed.set_image(url=gif)
 
         embed.add_field(name="\u200b", value="That's So Healthy !", inline=False)
         embed.set_footer(text="You're So Fit !")
 
-        await ctx.respond(f"{ctx.author.mention}",embed=embed)
+        await ctx.respond(embed=embed)
 
 
     @commands.slash_command(name="meditate", description="Meditate")
@@ -576,14 +577,14 @@ class Emotes(commands.Cog):
         gif = await get_gif("anime_meditate")
 
         embed = discord.Embed(
-            title=f"{ctx.author.display_name} Is Meditating", color=0x00FF00
+            title=f"{ctx.author.display_name} Is Meditating", color=0xBED7DC
         )
         embed.set_image(url=gif)
 
         embed.add_field(name="\u200b", value="That's So Peaceful !", inline=False)
         embed.set_footer(text="You're So Calm !")
 
-        await ctx.respond(f"{ctx.author.mention}",embed=embed)
+        await ctx.respond(embed=embed)
 
     @commands.slash_command(name="pray", description="Pray")
     async def pray(self, ctx):
@@ -591,14 +592,14 @@ class Emotes(commands.Cog):
         gif = await get_gif("anime_pray")
 
         embed = discord.Embed(
-            title=f"{ctx.author.display_name} Is Praying", color=0x00FF00
+            title=f"{ctx.author.display_name} Is Praying", color=0xBED7DC
         )
         embed.set_image(url=gif)
 
         embed.add_field(name="\u200b", value="That's So Spiritual !", inline=False)
         embed.set_footer(text="You're So Religious !")
 
-        await ctx.respond(f"{ctx.author.mention}",embed=embed)
+        await ctx.respond(embed=embed)
 
 
     @commands.slash_command(name="curse", description="Curse A User")
@@ -608,7 +609,7 @@ class Emotes(commands.Cog):
 
         embed = discord.Embed(
             title=f"{ctx.author.display_name} Curses {user.display_name}",
-            color=0x00FF00,
+            color=0xBED7DC,
         )
         embed.set_image(url=gif)
 
@@ -625,7 +626,7 @@ class Emotes(commands.Cog):
 
         embed = discord.Embed(
             title=f"{ctx.author.display_name} Blesses {user.display_name}",
-            color=0x00FF00,
+            color=0xBED7DC,
         )
         embed.set_image(url=gif)
 
@@ -642,7 +643,7 @@ class Emotes(commands.Cog):
 
         embed = discord.Embed(
             title=f"{ctx.author.display_name} Thanks {user.display_name}",
-            color=0x00FF00,
+            color=0xBED7DC,
         )
         embed.set_image(url=gif)
 
@@ -659,7 +660,7 @@ class Emotes(commands.Cog):
 
         embed = discord.Embed(
             title=f"{ctx.author.display_name} Welcomes {user.display_name}",
-            color=0x00FF00,
+            color=0xBED7DC,
         )
         embed.set_image(url=gif)
 
@@ -676,7 +677,7 @@ class Emotes(commands.Cog):
 
         embed = discord.Embed(
             title=f"{ctx.author.display_name} Says Bye To {user.display_name}",
-            color=0x00FF00,
+            color=0xBED7DC,
         )
         embed.set_image(url=gif)
 
@@ -692,14 +693,14 @@ class Emotes(commands.Cog):
         gif = await get_gif("anime_goodmorning")
 
         embed = discord.Embed(
-            title=f"{ctx.author.display_name} Says Good Morning", color=0x00FF00
+            title=f"{ctx.author.display_name} Says Good Morning", color=0xBED7DC
         )
         embed.set_image(url=gif)
 
         embed.add_field(name="\u200b", value="That's So Bright !", inline=False)
         embed.set_footer(text="You're So Cheerful !")
 
-        await ctx.respond(f"{ctx.author.mention}",embed=embed)
+        await ctx.respond(embed=embed)
 
 
     @commands.slash_command(name="goodnight", description="Say Good Night")
@@ -708,21 +709,21 @@ class Emotes(commands.Cog):
         gif = await get_gif("anime_goodnight")
 
         embed = discord.Embed(
-            title=f"{ctx.author.display_name} Says Good Night", color=0x00FF00
+            title=f"{ctx.author.display_name} Says Good Night", color=0xBED7DC
         )
         embed.set_image(url=gif)
 
         embed.add_field(name="\u200b", value="That's So Dark !", inline=False)
         embed.set_footer(text="You're So Sleepy !")
 
-        await ctx.respond(f"{ctx.author.mention}",embed=embed)
+        await ctx.respond(embed=embed)
 
 
     @commands.slash_command(name="emotemenu", description="Show Emote Menu")
     async def emotemenu(self, ctx):
         embed = discord.Embed(
             title="Emote Menu",
-            color=0x00FF00
+            color=0xBED7DC
         )
 
         emotes = [
