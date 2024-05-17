@@ -274,11 +274,14 @@ bot.load_extension('Cogs.Fun')
 bot.load_extension('Cogs.AFK')
 bot.load_extension('Cogs.Help')
 bot.load_extension('Cogs.Anime')
-bot.load_extension('Cogs.Emotes')
 bot.load_extension('Cogs.Utils')
+bot.load_extension('Cogs.Emotes')
 # bot.load_extension('Cogs.ModelAI')
 bot.load_extension('Cogs.Reminder')
+bot.load_extension('Cogs.Translate')
 bot.load_extension('Cogs.Moderation')
 bot.load_extension('Cogs.Information')
 bot.load_extension('Cogs.Entertainment')
+
+
 

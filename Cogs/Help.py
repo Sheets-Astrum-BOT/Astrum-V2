@@ -86,6 +86,10 @@ class CEmbed(discord.ui.View):
                 description="Reminder Commands"
             ),
             discord.SelectOption(
+                label="Translate",
+                description="Translate Commands"
+            ),
+            discord.SelectOption(
                 label="Moderation",
                 description="Moderation Commands"
             ),
@@ -224,6 +228,17 @@ class CEmbed(discord.ui.View):
         Entertainembed.add_field(name=f"{self.bot.get_application_command('joke').mention}", value="Sends A Random Joke", inline=False)
         Entertainembed.add_field(name=f"{self.bot.get_application_command('fact').mention}", value="Sends A Random Fact", inline=False)
 
+        Translateembed = discord.Embed(
+            title="Translate",
+            description="Simple Test Translation Commands",
+            color=0x2f3136
+        )
+
+        Translateembed.add_field(name=f"{self.bot.get_application_command('translate').mention}", value="Translates Text To Other Language", inline=False)
+        Translateembed.add_field(name=f"{self.bot.get_application_command('detect').mention}", value="Detects Language Of Text", inline=False)
+
+    
+
         if select.values[0] == "AI":
             await interaction.response.send_message(embed=AIembed, ephemeral=True)
 
@@ -247,6 +262,9 @@ class CEmbed(discord.ui.View):
 
         elif select.values[0] == "Reminder":
             await interaction.response.send_message(embed=Reminderembed, ephemeral=True)
+
+        elif select.values[0] == "Translate":
+            await interaction.response.send_message(embed=Translateembed, ephemeral=True)
 
         elif select.values[0] == "Information":
             await interaction.response.send_message(embed=Informationembed, ephemeral=True)
