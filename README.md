@@ -1,2 +1,2 @@
-Antrum Discord Bot
+# Antrum Discord Bot
 Multipurpose Discord Bot :)
