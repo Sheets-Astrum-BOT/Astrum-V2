@@ -44,7 +44,10 @@ class AnimeCog(commands.Cog):
         self.bot = bot
         self.anilist = Anilist()
         self.last_entry_id = None
+        
+        self.last_sent_ids = {}
         self.enabled_channels = {}
+        
         self.check_website.start()
 
         try:
@@ -122,61 +125,63 @@ class AnimeCog(commands.Cog):
     async def anisearch(self, ctx, *, anime_name: str):
 
         await ctx.defer()
+
         try:
-
             anime_dict = self.anilist.get_anime(anime_name=anime_name)
-
             anime_id = self.anilist.get_anime_id(anime_name)
-            anime_name = anime_dict["name_english"]
-            anime_desc = anime_dict["desc"]
-            starting_time = anime_dict["starting_time"]
-            next_airing_ep = anime_dict["next_airing_ep"]
-            season = anime_dict["season"]
-            genres = ", ".join(anime_dict["genres"])
-            anime_url = f"https://anilist.co/anime/{anime_id}/"
-            anime_score = anime_dict["average_score"]
-            current_ep = anime_dict["next_airing_ep"]["episode"] - 1
 
-            if anime_desc != None and len(anime_desc) != 0:
+            if not anime_dict or not anime_id:
+                await ctx.respond("Sorry, Anime Not Found")
+                return
+
+            anime_name = anime_dict["name_english"]
+            anime_desc = anime_dict.get("desc", None)
+            starting_time = anime_dict.get("starting_time", None)
+            next_airing_ep = anime_dict.get("next_airing_ep", None)
+            season = anime_dict.get("season", None)
+            genres = ", ".join(anime_dict.get("genres", [])) 
+            anime_url = f"https://anilist.co/anime/{anime_id}/"
+            anime_score = anime_dict.get("average_score", None)
+            current_ep = None
+
+            if next_airing_ep:
+                current_ep = next_airing_ep["episode"] - 1
+
+            if anime_desc:
                 anime_desc = anime_desc.split("<br>")
 
             anime_embed = discord.Embed(
-                title=anime_dict["name_english"], color=0xA0DB8E
+                title=anime_name, color=0xA0DB8E
             )
-            anime_embed.set_image(url=anime_dict["banner_image"])
-            anime_embed.add_field(name="Synopsis", value=anime_desc[0], inline=False)
-            anime_embed.add_field(name="\u200b", value="\u200b", inline=False)
-            anime_embed.add_field(
-                name="Anime ID",
-                value=self.anilist.get_anime_id(anime_name),
-                inline=True,
-            )
-            anime_embed.add_field(
-                name="Airing Format", value=anime_dict["airing_format"], inline=True
-            )
-            anime_embed.add_field(
-                name="Airing Status", value=anime_dict["airing_status"], inline=True
-            )
-            anime_embed.add_field(name="Start Date", value=starting_time, inline=True)
-            anime_embed.add_field(name="Score", value=anime_score, inline=True)
-            anime_embed.add_field(name="Season", value=season, inline=True)
-            anime_embed.add_field(name="Genres", value=genres, inline=False)
-            anime_embed.add_field(
-                name="More Info", value=f"[AniList Page]({anime_url})", inline=False
-            )
+            anime_embed.set_image(url=anime_dict.get("banner_image", None)) 
+            if anime_desc:
+                anime_embed.add_field(name="Synopsis", value=anime_desc[0], inline=False)
+            if anime_id:
+                anime_embed.add_field(name="Anime ID", value=anime_id, inline=True)
+            if starting_time:
+                anime_embed.add_field(name="Start Date", value=starting_time, inline=True)
+            if season:
+                anime_embed.add_field(name="Season", value=season, inline=True)
+            if genres:
+                anime_embed.add_field(name="Genres", value=genres, inline=False)
+            if anime_url:
+                anime_embed.add_field(name="More Info", value=f"[AniList Page]({anime_url})", inline=False)
 
-            anime_embed.set_footer(
-                text=f"Next Episode: {next_airing_ep['episode']} | Current Episode: {current_ep}"
-            )
+            if next_airing_ep:
+                anime_embed.set_footer(
+                    text=f"Next Episode: {next_airing_ep['episode']} | Current Episode: {current_ep}"
+                )
+            else:
+                anime_embed.set_footer(text="Anime Has Finished Airing")
 
             view = StartWatching(anime_name, 1, self.bot)
             await ctx.respond(embed=anime_embed, view=view)
 
         except Exception as e:
-            print(e)
-            await ctx.respond(
-                f"An Error Occurred Searching For Anime\n```Error: {e}```"
-            )
+            await ctx.respond("Anime Not Found")
+            print(f"Error : {e}")
+
+
 
     @commands.slash_command(name="watch", description="Get Streaming Link Of An Anime")
     async def watch(self, ctx, *, anime_name: str, episode: int = 1):
@@ -352,77 +357,59 @@ class AnimeCog(commands.Cog):
 
     @tasks.loop(minutes=30)
     async def check_website(self):
+        async with aiohttp.ClientSession() as session:
+            async with session.get(
+                "https://astrumanimeapi.vercel.app/anime/gogoanime/recent-episodes"
+            ) as resp:
+                data = await resp.json()
 
-        for guild_id, channel_id in self.enabled_channels.items():
+                result = data["results"][0] 
 
+                for guild_id, channel_id in self.enabled_channels.items():
+                    guild = self.bot.get_guild(int(guild_id))
+                    if guild is None:
+                        continue
 
-            guild = self.bot.get_guild(int(guild_id))
+                    channel = guild.get_channel(int(channel_id))
+                    if channel is None:
+                        continue
 
-            if guild is None:
-                continue
+                    print(f"Anime Update For : {guild} Channel : {channel}")
 
-            channel = guild.get_channel(int(channel_id))
+                    episode_id = result["episodeId"]
 
-            if channel is None:
-                continue
+                    if self.last_sent_ids.get(channel_id) == episode_id:
+                        continue
 
-            print(f"Anime Update For : {guild} Channel : {channel}")
+                    self.last_sent_ids[channel_id] = episode_id
 
-            async with aiohttp.ClientSession() as session:
+                    try:
+                        anime_dict = self.anilist.get_anime(anime_name=result["title"])
+                        anime_name = anime_dict["name_english"]
+                        anime_id = self.anilist.get_anime_id(result["title"])
+                        anime_url = f"https://anilist.co/anime/{anime_id}/"
+                    except:
+                        anime_name = result["title"]
+                        anime_url = result["url"]
 
-                async with session.get(
-                    "https://astrumanimeapi.vercel.app/anime/gogoanime/recent-episodes"
-                ) as resp:
+                    embed = discord.Embed(
+                        title="Anime Episode Alert ~ OniChann",
+                        description="\u200b",
+                        color=discord.Color.blurple(),
+                    )
 
-                    data = await resp.json()
+                    if anime_name is not None:
+                        embed.add_field(name=anime_name, value="\u200b", inline=False)
+                    else:
+                        embed.add_field(name=result["title"], value="\u200b", inline=False)
 
-                    if self.last_entry_id != data["results"][0]["id"]:
-                        result = data["results"][0]
+                    embed.add_field(name=f"Episode : {result['episodeNumber']}", value="\u200b", inline=False)
+                    embed.set_image(url=result["image"])
+                    embed.url = anime_url
+                    embed.set_footer(text="Use Settings To Enable/Disable Updates")
 
-                        try:
-                            anime_dict = self.anilist.get_anime(
-                                anime_name=result["title"]
-                            )
-                            anime_name = anime_dict["name_english"]
+                    await channel.send(embed=embed)
 
-                            image = anime_dict["banner_image"]
-
-                            anime_id = self.anilist.get_anime_id(result["title"])
-
-                            anime_url = f"https://anilist.co/anime/{anime_id}/"
-
-                        except:
-                            anime_name = result["title"]
-                            image = result["image"]
-                            anime_url = result["url"]
-
-                        embed = discord.Embed(
-                            title="Anime Episode Alert ~ OniChann",
-                            description="\u200b",
-                            color=discord.Color.blurple(),
-                        )
-
-                        if anime_name != None:
-                            embed.add_field(
-                                name=anime_name, value="\u200b", inline=False
-                            )
-
-                        else:
-                            embed.add_field(
-                                name=result["title"], value="\u200b", inline=False
-                            )
-
-                        embed.add_field(
-                            name=f"Episode : {result['episodeNumber']}",
-                            value="\u200b",
-                            inline=False,
-                        )
-                        embed.set_image(url=image)
-                        embed.url = anime_url
-
-                        embed.set_footer(text="Use Settings To Enable/Disable Updates")
-
-                        await channel.send(embed=embed)
 
 
     @check_website.before_loop
