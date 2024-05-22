@@ -133,7 +133,7 @@ class TextGenerationCog(commands.Cog):
             value="Enabled" if setting.lower() == "enable" else "Disabled",
         )
 
-        await ctx.send(embed=embed)
+        await ctx.respond(embed=embed)
 
 
 def clean_discord_message(input_string):
