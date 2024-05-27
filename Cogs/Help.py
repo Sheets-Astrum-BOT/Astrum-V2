@@ -111,6 +111,9 @@ class CEmbed(discord.ui.View):
             color=0x2f3136
         )
 
+        AIembed.add_field(name=f"{self.bot.get_application_command('forget').mention}", value="Clears Message History For The Channel", inline=False)
+        AIembed.add_field(name=f"{self.bot.get_application_command('createchat').mention}", value="Creates A New Chat With The AI", inline=False)
+
         AFKembed = discord.Embed(
             title="AFK",
             description="Simple AFK Tool",

@@ -10,6 +10,7 @@ class AFK(commands.Cog):
         try:
             with open('AFK.json', 'r') as f:
                 self.afk_data = json.load(f)
+                
         except FileNotFoundError:
             self.afk_data = {}
 
