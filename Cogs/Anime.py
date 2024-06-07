@@ -334,9 +334,9 @@ class AnimeCog(commands.Cog):
                 await ctx.respond(embed=embeds[0], view=NextAnime(embeds))
 
     @commands.slash_command(
-        name="settings", description="Get The Current Anime Update Settings"
+        name="animesettings", description="Get The Current Anime Update Settings"
     )
-    async def settings(self, ctx):
+    async def anime(self, ctx):
 
         guild_id = str(ctx.guild.id)
         channel_id = self.enabled_channels.get(guild_id, None)

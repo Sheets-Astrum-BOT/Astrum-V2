@@ -269,7 +269,6 @@ async def tictactoe(ctx: commands.Context, opponent: discord.Member):
     game = TicTacToe(challenger, opponent)
     await challenge_message.edit(content=f"Tic Tac Toe: {challenger.mention} goes first!", view=game)
 
-    
 bot.load_extension('Cogs.AI')
 bot.load_extension('Cogs.Fun')
 bot.load_extension('Cogs.AFK')
@@ -283,5 +282,5 @@ bot.load_extension('Cogs.Moderation')
 bot.load_extension('Cogs.Information')
 bot.load_extension('Cogs.Entertainment')
 
-bot.run('BOT TOKEN')
+bot.run('TOKEN')
 
