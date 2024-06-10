@@ -153,13 +153,13 @@ class CEmbed(discord.ui.View):
             color=0x2f3136
         )
 
-        Animeembed.add_field(name=f"{self.bot.get_application_command('anisearch').mention}", value="Sends Information About An Anime", inline=False)
-        Animeembed.add_field(name=f"{self.bot.get_application_command('watch').mention}", value="Sends Streaming Link Of An Anime", inline=False)
-        Animeembed.add_field(name=f"{self.bot.get_application_command('mangasearch').mention}", value="Sends Information About A Manga", inline=False)
-        Animeembed.add_field(name=f"{self.bot.get_application_command('topanime').mention}", value="Sends Streaming Link Of A Manga", inline=False)
-        Animeembed.add_field(name=f"{self.bot.get_application_command('settings').mention}", value="Enable/Disable Anime Updates", inline=False)
-        Animeembed.add_field(name=f"{self.bot.get_application_command('waifu').mention}", value="Sends A Random Waifu", inline=False)
-        Animeembed.add_field(name=f"{self.bot.get_application_command('nwaifu').mention}", value="Sends A Random NSFW Waifu", inline=False)
+        Animeembed.add_field(name=f"{self.bot.get_application_command('anime').subcommands[2].mention}", value="Sends Information About An Anime", inline=False)
+        Animeembed.add_field(name=f"{self.bot.get_application_command('anime').subcommands[3].mention}", value="Sends Streaming Link Of An Anime", inline=False)
+        Animeembed.add_field(name=f"{self.bot.get_application_command('manga').subcommands[0].mention}", value="Sends Information About A Manga", inline=False)
+        Animeembed.add_field(name=f"{self.bot.get_application_command('anime').subcommands[4].mention}", value="Sends To Airing Anime", inline=False)
+        Animeembed.add_field(name=f"{self.bot.get_application_command('anime').subcommands[5].mention}", value="Enable/Disable Anime Updates", inline=False)
+        Animeembed.add_field(name=f"{self.bot.get_application_command('anime').subcommands[0].mention}", value="Sends A Random Waifu", inline=False)
+        Animeembed.add_field(name=f"{self.bot.get_application_command('anime').subcommands[1].mention}", value="Sends A Random NSFW Waifu", inline=False)
 
         Emotesembed = discord.Embed(
             title="Emotes",
@@ -230,6 +230,7 @@ class CEmbed(discord.ui.View):
         Entertainembed.add_field(name=f"{self.bot.get_application_command('quote').mention}", value="Sends A Random Quote", inline=False)
         Entertainembed.add_field(name=f"{self.bot.get_application_command('joke').mention}", value="Sends A Random Joke", inline=False)
         Entertainembed.add_field(name=f"{self.bot.get_application_command('fact').mention}", value="Sends A Random Fact", inline=False)
+        Entertainembed.add_field(name=f"{self.bot.get_application_command('settings').subcommands[9].mention}", value="Sends The Help For Settings", inline=False)
 
         Translateembed = discord.Embed(
             title="Translate",

@@ -6,15 +6,16 @@ import discord
 from urllib.parse import quote
 from discord.ext import commands
 
+
 def get_gif(query):
 
-    api_key = 'AIzaSyBadJ6mJ2zUDmZnQBoXQqjFjy6RFYgnpEc'
-    url = f'https://tenor.googleapis.com/v2/search?q={query}&key={api_key}'
+    api_key = "AIzaSyBadJ6mJ2zUDmZnQBoXQqjFjy6RFYgnpEc"
+    url = f"https://tenor.googleapis.com/v2/search?q={query}&key={api_key}"
 
     response = requests.get(url)
     data = response.json()
 
-    gif_urls = [entry['media_formats']['gif']['url'] for entry in data['results']]
+    gif_urls = [entry["media_formats"]["gif"]["url"] for entry in data["results"]]
     random_gif_url = random.choice(gif_urls)
 
     return random_gif_url
@@ -24,12 +25,12 @@ def moviequote():
 
     url = "https://juanroldan1989-moviequotes-v1.p.rapidapi.com/api/v1/quotes"
 
-    querystring = {"actor":"Al Pacino"}
+    querystring = {"actor": "Al Pacino"}
 
     headers = {
         "Authorization": "Token token=yd8WzkWNEEzGtqMSgiZBrwtt",
         "X-RapidAPI-Key": "1cd68ddeb1mshb590a11eaf553edp111b0bjsn640bd1591c6c",
-        "X-RapidAPI-Host": "juanroldan1989-moviequotes-v1.p.rapidapi.com"
+        "X-RapidAPI-Host": "juanroldan1989-moviequotes-v1.p.rapidapi.com",
     }
 
     response = requests.get(url, headers=headers, params=querystring)
@@ -40,7 +41,6 @@ def moviequote():
 class Fun(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-
 
     @commands.slash_command(name="roll", description="Roll Between Two Numbers")
     async def roll(self, ctx, min: int = 1, max: int = 100):
@@ -215,6 +215,61 @@ class Fun(commands.Cog):
 
         await ctx.respond(gif_url, view=GIF_Refresh(query))
 
+    @commands.slash_command(name="lyrics", description="Gets Lyrics For A Song")
+    async def lyrics(self, ctx, *, song: str):
+
+        song = song.replace(" ", "_")
+
+        url = f"https://some-random-api.com/lyrics?title={song}"
+
+        async with aiohttp.ClientSession() as session:
+            async with session.get(url) as response:
+
+                if (
+                    response.status == 404
+                    or response.status == 500
+                    or response.status == 429
+                    or response.status == 400
+                ):
+                    embed = discord.Embed(
+                        title="Error",
+                        description="Lyrics Not Found",
+                        color=0xFF5733,
+                    )
+
+                    await ctx.respond(embed=embed)
+                    return
+
+                try:
+
+                    lyrics_json = await response.json()
+
+                    name = lyrics_json["title"]
+                    author = lyrics_json["author"]
+                    lyrics = lyrics_json["lyrics"]
+                    image = lyrics_json["thumbnail"]["genius"]
+
+                    embed = discord.Embed(
+                        title=f"{name} By {author}",
+                        description=lyrics,
+                        color=0xFF5733,
+                    )
+
+                    embed.set_image(url=image)
+
+                    await ctx.respond(embed=embed)
+
+                except Exception as e:
+
+                    embed = discord.Embed(
+                        title="Error",
+                        description="Lyrics Not Found",
+                        color=0xFF5733,
+                    )
+
+                    await ctx.respond(embed=embed)
+                    return
+
     @commands.slash_command(name="roast", description="Roast A User")
     async def roast(self, ctx, user: discord.Member):
 
@@ -231,14 +286,14 @@ class Fun(commands.Cog):
                 color=0xFF5733,
             )
 
-            roast_gif = get_gif('anime_laugh')
+            roast_gif = get_gif("anime_laugh")
 
             embed.set_image(url=roast_gif)
             embed.set_footer(text="Ouch, Did It Hurt ?")
 
             await ctx.respond(embed=embed)
             return
-        
+
         if ctx.author.id == 849178172556705793:
 
             embed = discord.Embed(
@@ -247,7 +302,7 @@ class Fun(commands.Cog):
                 color=0xFF5733,
             )
 
-            roast_gif = get_gif('aime_laugh')
+            roast_gif = get_gif("aime_laugh")
 
             embed.set_image(url=roast_gif)
             embed.set_footer(text="Ouch, Did It Hurt ?")
@@ -256,20 +311,20 @@ class Fun(commands.Cog):
             return
 
         if ctx.author.id == 727012870683885578:
-                
-                embed = discord.Embed(
-                    title="Yo Mama Roast",
-                    description=f"## The Lord Roasted\n\n### {insult}",
-                    color=0xFF5733,
-                )
-    
-                roast_gif = get_gif('anime_laugh')
-    
-                embed.set_image(url=roast_gif)
-                embed.set_footer(text="Ouch, Did It Hurt ?")
-    
-                await ctx.respond(embed=embed)
-                return
+
+            embed = discord.Embed(
+                title="Yo Mama Roast",
+                description=f"## The Lord Roasted\n\n### {insult}",
+                color=0xFF5733,
+            )
+
+            roast_gif = get_gif("anime_laugh")
+
+            embed.set_image(url=roast_gif)
+            embed.set_footer(text="Ouch, Did It Hurt ?")
+
+            await ctx.respond(embed=embed)
+            return
 
         else:
 
@@ -279,12 +334,13 @@ class Fun(commands.Cog):
                 color=0xFF5733,
             )
 
-            roast_gif = get_gif('aime_roast')
+            roast_gif = get_gif("aime_roast")
 
             embed.set_image(url=roast_gif)
             embed.set_footer(text="Ouch, Did It Hurt ?")
 
-            await ctx.respond(f'{user.mention}',embed=embed)
+            await ctx.respond(f"{user.mention}", embed=embed)
+
 
 class GIF_Refresh(discord.ui.View):
 
@@ -298,16 +354,17 @@ class GIF_Refresh(discord.ui.View):
     @discord.ui.button(style=discord.ButtonStyle.secondary, emoji="🔃")
     async def button_callback(self, button, interaction):
 
-        api_key = 'AIzaSyBadJ6mJ2zUDmZnQBoXQqjFjy6RFYgnpEc'
-        url = f'https://tenor.googleapis.com/v2/search?q={self.query}&key={api_key}'
+        api_key = "AIzaSyBadJ6mJ2zUDmZnQBoXQqjFjy6RFYgnpEc"
+        url = f"https://tenor.googleapis.com/v2/search?q={self.query}&key={api_key}"
 
         response = requests.get(url)
         data = response.json()
 
-        gif_urls = [entry['media_formats']['gif']['url'] for entry in data['results']]
+        gif_urls = [entry["media_formats"]["gif"]["url"] for entry in data["results"]]
         random_gif_url = random.choice(gif_urls)
 
         await interaction.response.edit_message(content=random_gif_url, view=self)
+
 
 def setup(bot):
     bot.add_cog(Fun(bot))

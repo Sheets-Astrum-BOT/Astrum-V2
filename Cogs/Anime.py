@@ -6,6 +6,7 @@ import requests
 from discord import option
 from discord.ui.item import Item
 from discord.ext import commands, tasks
+from discord.commands import SlashCommandGroup
 
 from AnilistPython import Anilist
 
@@ -50,17 +51,21 @@ class AnimeCog(commands.Cog):
         
         self.check_website.start()
 
+
         try:
             with open("Anime.json", "r") as file:
                 self.enabled_channels = json.load(file)
 
         except FileNotFoundError:
             pass
+        
 
     def cog_unload(self):
         self.check_website.cancel()
 
-    @commands.slash_command(
+    anime = SlashCommandGroup("anime", "Anime Commands")
+
+    @anime.command(
         name="waifu",
         description="Get A Random Waifu Image",
     )
@@ -90,7 +95,9 @@ class AnimeCog(commands.Cog):
         except Exception as e:
             await ctx.respond(f"An Error Occurred : {e}")
 
-    @commands.slash_command(
+    print(anime.subcommands)
+
+    @anime.command(
         name="nwaifu", description="Get A Random NSFW Waifu Image", nsfw=True
     )
     @option(
@@ -119,10 +126,10 @@ class AnimeCog(commands.Cog):
         except Exception as e:
             await ctx.respond(f"An Error Occurred : {e}")
 
-    @commands.slash_command(
-        name="anisearch", description="Get Information About An Anime"
+    @anime.command(
+        name="search", description="Get Information About An Anime"
     )
-    async def anisearch(self, ctx, *, anime_name: str):
+    async def search(self, ctx, *, anime_name: str):
 
         await ctx.defer()
 
@@ -183,7 +190,7 @@ class AnimeCog(commands.Cog):
 
 
 
-    @commands.slash_command(name="watch", description="Get Streaming Link Of An Anime")
+    @anime.command(name="watch", description="Get Streaming Link Of An Anime")
     async def watch(self, ctx, *, anime_name: str, episode: int = 1):
 
         await ctx.defer()
@@ -236,59 +243,11 @@ class AnimeCog(commands.Cog):
         except Exception as e:
             await ctx.respond(f"An Error Occurred : {e}")
 
-    @commands.slash_command(
-        name="mangasearch", description="Get Information About A Manga"
+
+    @anime.command(
+        name="toparing", description="Get The List For Top Airing Anime"
     )
-    async def mangasearch(self, ctx, *, manga_name: str):
-        try:
-            manga_dict = self.anilist.get_manga(manga_name=manga_name)
-
-            manga_id = self.anilist.get_manga_id(manga_name)
-            manga_desc = manga_dict["desc"]
-            manga_title = manga_dict["name_english"]
-            starting_time = manga_dict["starting_time"]
-            airing_format = manga_dict["release_format"]
-            airing_status = manga_dict["release_status"]
-            season = manga_dict["volumes"]
-            genres = ", ".join(manga_dict["genres"])
-            manga_url = f"https://anilist.co/manga/{manga_id}/"
-            cover_image = manga_dict["banner_image"]
-            manga_score = manga_dict["average_score"]
-
-            if manga_desc != None and len(manga_desc) != 0:
-                manga_desc = manga_desc.split("<br>")
-
-            manga_embed = discord.Embed(title=manga_title, color=0xA0DB8E)
-            manga_embed.set_image(url=cover_image)
-            manga_embed.add_field(name="Synopsis", value=manga_desc[0], inline=False)
-            manga_embed.add_field(name="\u200b", value="\u200b", inline=False)
-            manga_embed.add_field(name="Manga ID", value=manga_id, inline=True)
-            manga_embed.add_field(
-                name="Release Format", value=airing_format, inline=True
-            )
-            manga_embed.add_field(
-                name="Release Status", value=airing_status, inline=True
-            )
-            manga_embed.add_field(name="Start Date", value=starting_time, inline=True)
-            manga_embed.add_field(name="Score", value=manga_score, inline=True)
-            manga_embed.add_field(name="Volumes", value=season, inline=True)
-            manga_embed.add_field(name="Genres", value=genres, inline=False)
-            manga_embed.add_field(
-                name="More Info", value=f"[AniList Page]({manga_url})", inline=False
-            )
-
-            await ctx.respond(embed=manga_embed)
-
-        except Exception as e:
-            print(e)
-            await ctx.respond(
-                f"An Error Occurred Searching For Manga\n```Error: {e}```"
-            )
-
-    @commands.slash_command(
-        name="topanime", description="Get The List For Top Airing Anime"
-    )
-    async def topanime(self, ctx):
+    async def toparing(self, ctx):
 
         await ctx.defer()
 
@@ -333,10 +292,10 @@ class AnimeCog(commands.Cog):
 
                 await ctx.respond(embed=embeds[0], view=NextAnime(embeds))
 
-    @commands.slash_command(
-        name="animesettings", description="Get The Current Anime Update Settings"
+    @anime.command(
+        name="settings", description="Get The Current Anime Update Settings"
     )
-    async def anime(self, ctx):
+    async def settings(self, ctx):
 
         guild_id = str(ctx.guild.id)
         channel_id = self.enabled_channels.get(guild_id, None)
@@ -354,6 +313,57 @@ class AnimeCog(commands.Cog):
         await ctx.respond(
             embed=embed, view=AnimeUpdateSettings(ctx.channel, self.enabled_channels)
         )
+
+    manga = SlashCommandGroup('manga', 'manga commands')
+
+    @manga.command(
+        name="search", description="Get Information About A Manga"
+    )
+    async def search(self, ctx, *, manga_name: str):
+        try:
+            manga_dict = self.anilist.get_manga(manga_name=manga_name)
+
+            manga_id = self.anilist.get_manga_id(manga_name)
+            manga_desc = manga_dict["desc"]
+            manga_title = manga_dict["name_english"]
+            starting_time = manga_dict["starting_time"]
+            airing_format = manga_dict["release_format"]
+            airing_status = manga_dict["release_status"]
+            season = manga_dict["volumes"]
+            genres = ", ".join(manga_dict["genres"])
+            manga_url = f"https://anilist.co/manga/{manga_id}/"
+            cover_image = manga_dict["banner_image"]
+            manga_score = manga_dict["average_score"]
+
+            if manga_desc != None and len(manga_desc) != 0:
+                manga_desc = manga_desc.split("<br>")
+
+            manga_embed = discord.Embed(title=manga_title, color=0xA0DB8E)
+            manga_embed.set_image(url=cover_image)
+            manga_embed.add_field(name="Synopsis", value=manga_desc[0], inline=False)
+            manga_embed.add_field(name="\u200b", value="\u200b", inline=False)
+            manga_embed.add_field(name="Manga ID", value=manga_id, inline=True)
+            manga_embed.add_field(
+                name="Release Format", value=airing_format, inline=True
+            )
+            manga_embed.add_field(
+                name="Release Status", value=airing_status, inline=True
+            )
+            manga_embed.add_field(name="Start Date", value=starting_time, inline=True)
+            manga_embed.add_field(name="Score", value=manga_score, inline=True)
+            manga_embed.add_field(name="Volumes", value=season, inline=True)
+            manga_embed.add_field(name="Genres", value=genres, inline=False)
+            manga_embed.add_field(
+                name="More Info", value=f"[AniList Page]({manga_url})", inline=False
+            )
+
+            await ctx.respond(embed=manga_embed)
+
+        except Exception as e:
+            print(e)
+            await ctx.respond(
+                f"An Error Occurred Searching For Manga\n```Error: {e}```"
+            )
 
     @tasks.loop(minutes=30)
     async def check_website(self):
@@ -410,7 +420,7 @@ class AnimeCog(commands.Cog):
 
                     await channel.send(embed=embed)
 
-
+    
 
     @check_website.before_loop
     async def before_check_website(self):

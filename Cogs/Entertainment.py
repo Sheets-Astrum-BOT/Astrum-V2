@@ -1,10 +1,10 @@
-import aiohttp
-import json
 import os
+import json
 import discord
+import aiohttp 
 from discord.ext import commands, tasks
-from discord.commands import SlashCommandGroup
 from datetime import datetime, timedelta
+from discord.commands import SlashCommandGroup
 
 
 def load_json(filename):
@@ -56,6 +56,8 @@ class Entertainment(commands.Cog):
         )
 
         await ctx.respond(embed=embed)
+
+    print(settings.subcommands)
 
     @settings.command(name="set_joke_channel", description="Set channel for jokes")
     async def set_joke_channel(
@@ -201,16 +203,14 @@ class Entertainment(commands.Cog):
 
     @commands.slash_command(name="joke", description="Sends A Random Joke")
     async def joke(self, ctx):
-        url = "https://v2.jokeapi.dev/joke/Any"
+        url = "https://some-random-api.com/others/joke"
         async with aiohttp.ClientSession() as session:
             async with session.get(url) as response:
                 joke_json = await response.json()
-                setup = joke_json.get("setup")
-                delivery = joke_json.get("delivery")
+                setup = joke_json.get("joke")
                 embed = discord.Embed(title="Here's A Joke", color=0x00FF00)
                 if setup:
                     embed.add_field(name="\u200b", value=setup, inline=False)
-                embed.add_field(name="\u200b", value=delivery, inline=False)
                 await ctx.respond(embed=embed, view=Joke_Refresh())
 
     @commands.slash_command(name="quote", description="Sends A Random Quote")
@@ -250,47 +250,47 @@ class Entertainment(commands.Cog):
         )
         embed.add_field(
             name="Set Meme Channel",
-            value="`/settings set_meme_channel #channel frequency`",
+            value=f"{self.bot.get_application_command('settings').subcommands[0].mention}",
             inline=False,
         )
         embed.add_field(
             name="Set Joke Channel",
-            value="`/settings set_joke_channel #channel frequency`",
+            value=f"{self.bot.get_application_command('settings').subcommands[1].mention}",
             inline=False,
         )
         embed.add_field(
             name="Set Quote Channel",
-            value="`/settings set_quote_channel #channel frequency`",
+            value=f"{self.bot.get_application_command('settings').subcommands[2].mention}",
             inline=False,
         )
         embed.add_field(
             name="Set Fact Channel",
-            value="`/settings set_fact_channel #channel frequency`",
+            value=f"{self.bot.get_application_command('settings').subcommands[3].mention}",
             inline=False,
         )
         embed.add_field(
             name="Reset Meme Channel",
-            value="`/settings reset_meme`",
+            value=f"{self.bot.get_application_command('settings').subcommands[4].mention}",
             inline=False,
         )
         embed.add_field(
             name="Reset Joke Channel",
-            value="`/settings reset_joke`",
+            value=f"{self.bot.get_application_command('settings').subcommands[5].mention}",
             inline=False,
         )
         embed.add_field(
             name="Reset Quote Channel",
-            value="`/settings reset_quote`",
+            value=f"{self.bot.get_application_command('settings').subcommands[6].mention}",
             inline=False,
         )
         embed.add_field(
             name="Reset Fact Channel",
-            value="`/settings reset_fact`",
+            value=f"{self.bot.get_application_command('settings').subcommands[7].mention}",
             inline=False,
         )
         embed.add_field(
             name="Current Automatic Fun Settings",
-            value="`/settings current_settings`",
+            value=f"{self.bot.get_application_command('settings').subcommands[8].mention}",
             inline=False,
         )
         await ctx.respond(embed=embed)
@@ -315,16 +315,14 @@ class Entertainment(commands.Cog):
                 await channel.send(meme_url)
 
     async def send_joke(self, channel):
-        url = "https://v2.jokeapi.dev/joke/Any"
+        url = "https://some-random-api.com/others/joke"
         async with aiohttp.ClientSession() as session:
             async with session.get(url) as response:
                 joke_json = await response.json()
-                setup = joke_json.get("setup")
-                delivery = joke_json.get("delivery")
+                setup = joke_json.get("joke")
                 embed = discord.Embed(title="Here's A Joke", color=0x00FF00)
                 if setup:
                     embed.add_field(name="\u200b", value=setup, inline=False)
-                embed.add_field(name="\u200b", value=delivery, inline=False)
                 await channel.send(embed=embed)
 
     async def send_quote(self, channel):
@@ -415,7 +413,7 @@ class Joke_Refresh(discord.ui.View):
 
     @discord.ui.button(style=discord.ButtonStyle.secondary, emoji="🔃")
     async def button_callback(self, button, interaction):
-        url = "https://v2.jokeapi.dev/joke/Any"
+        url = "https://sv443.net/jokeapi/v2/joke/any"
         async with aiohttp.ClientSession() as session:
             async with session.get(url) as response:
                 joke_json = await response.json()
