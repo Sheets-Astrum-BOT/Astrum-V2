@@ -39,7 +39,7 @@ bot_template = [
 genai.configure(api_key="AIzaSyDbd7pQNZRnbG7dbmEIGLhgOrDszwQ6Ctw")
 
 text_model = genai.GenerativeModel(
-    model_name="gemini-1.5-pro-latest",
+    model_name="gemini-1.5-flash",
     generation_config=text_generation_config,
     safety_settings=safety_settings,
 )
