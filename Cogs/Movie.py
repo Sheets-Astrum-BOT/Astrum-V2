@@ -128,7 +128,8 @@ class Movie(commands.Cog):
                     inline=False,
                 )
 
-            await ctx.respond(embed=embed)
+            view = ShowView(self.bot, results)
+            await ctx.respond(embed=embed, view=view)
         else:
             embed = discord.Embed(
                 title="Error",

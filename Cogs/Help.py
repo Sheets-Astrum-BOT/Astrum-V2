@@ -281,6 +281,9 @@ class CEmbed(discord.ui.View):
         elif select.values[0] == "Emotes":
             await interaction.response.send_message(embed=Emotesembed, ephemeral=True)
 
+        elif select.values[0] == "Movies":
+            await interaction.response.send_message(embed=Moviesembed, ephemeral=True)
+
         elif select.values[0] == "Utility":
             await interaction.response.send_message(embed=Utilsembed, ephemeral=True)
 
