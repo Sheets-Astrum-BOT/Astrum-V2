@@ -31,6 +31,8 @@ class Help(commands.Cog):
         cembed.add_field(name="Fun", value="\u200b", inline=True)
         cembed.add_field(name="Help", value="\u200b", inline=True)
         cembed.add_field(name="Anime", value="\u200b", inline=True)
+        cembed.add_field(name="Emotes", value="\u200b", inline=True)
+        cembed.add_field(name="Movies", value="\u200b", inline=True)
         cembed.add_field(name="Utility", value="\u200b", inline=True)
         cembed.add_field(name="Reminder", value="\u200b", inline=True)
         cembed.add_field(name="-----------------------------", value="\u200b", inline=False)
@@ -76,6 +78,10 @@ class CEmbed(discord.ui.View):
             discord.SelectOption(
                 label="Emotes",
                 description="Emote Commands"
+            ),
+            discord.SelectOption(
+                label="Movies",
+                description="Movie Commands"
             ),
             discord.SelectOption(
                 label="Utility",
@@ -160,6 +166,20 @@ class CEmbed(discord.ui.View):
         Animeembed.add_field(name=f"{self.bot.get_application_command('anime').subcommands[5].mention}", value="Enable/Disable Anime Updates", inline=False)
         Animeembed.add_field(name=f"{self.bot.get_application_command('anime').subcommands[0].mention}", value="Sends A Random Waifu", inline=False)
         Animeembed.add_field(name=f"{self.bot.get_application_command('anime').subcommands[1].mention}", value="Sends A Random NSFW Waifu", inline=False)
+
+        Moviesembed = discord.Embed(
+            title="Movies",
+            description="Movie Commands",
+            color=0x2f3136
+        )
+
+        Moviesembed.add_field(name=f"{self.bot.get_application_command('movie').subcommands[0].mention}", value="Search For Movies", inline=False)
+        Moviesembed.add_field(name=f"{self.bot.get_application_command('movie').subcommands[1].mention}", value="Get Latest Movies", inline=False)
+        Moviesembed.add_field(name=f"{self.bot.get_application_command('movie').subcommands[2].mention}", value="Get Movie Info By ID", inline=False)
+
+        Moviesembed.add_field(name=f"{self.bot.get_application_command('show').subcommands[0].mention}", value="Search For Shows", inline=False)
+        Moviesembed.add_field(name=f"{self.bot.get_application_command('show').subcommands[1].mention}", value="Get Latest Shows", inline=False)
+        Moviesembed.add_field(name=f"{self.bot.get_application_command('show').subcommands[2].mention}", value="Get Show Info By ID", inline=False)
 
         Emotesembed = discord.Embed(
             title="Emotes",

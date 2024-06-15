@@ -283,5 +283,5 @@ bot.load_extension('Cogs.Moderation')
 bot.load_extension('Cogs.Information')
 bot.load_extension('Cogs.Entertainment')
 
-bot.run('MTExMTU1NTY1MjYxMjAxODI0Ng.G7beCO.wZYnV6XBD4Wl80CwK_GkznUZligXP0uecx2kXE')
+bot.run('TOKEN')
 
