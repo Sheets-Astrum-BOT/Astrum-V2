@@ -328,16 +328,6 @@ class LinkView(discord.ui.View):
             )
             self.add_item(self.show_button)
 
-    async def on_timeout(self):
-        self.movie_button.disabled = True
-        self.show_button.disabled = True
-        await self.message.edit(view=self)
-
-    async def on_error(self, error, item, interaction):
-        self.movie_button.disabled = True
-        self.show_button.disabled = True
-        await self.message.edit(view=self)
-
     async def on_button_click(self, interaction):
         if self.type == "Movie":
             await interaction.response.send_message(self.movie_url, ephemeral=True)
