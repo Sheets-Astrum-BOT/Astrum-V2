@@ -94,7 +94,7 @@ class Reminder(commands.Cog):
             embed = discord.Embed(title="Your Reminders", color=discord.Color.blue())
             for index, data in enumerate(self.reminders[user_id], start=1):
                 embed.add_field(name=f"Reminder {index}: {data['reminder']}", value=f"Remind Time: {data['remind_time']}", inline=False)
-            await ctx.respond(embed=embed, view=Reminder_Delete(bot=self.bot,reminders=self.reminders))
+            await ctx.respond(embed=embed, view=Reminder_Delete(bot=self.bot, reminders=self.reminders, save_reminders=self.save_reminders))
         else:
             embed = discord.Embed(
                 title="No Reminders", description="You Don't Have Any Reminders Set", color=discord.Color.red())
