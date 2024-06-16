@@ -45,7 +45,7 @@ text_model = genai.GenerativeModel(
 )
 
 image_model = genai.GenerativeModel(
-    model_name="gemini-pro-vision",
+    model_name="gemini-1.5-flash",
     generation_config=image_generation_config,
     safety_settings=safety_settings,
 )
@@ -106,8 +106,8 @@ async def generate_response_with_text(channel_id, message_text):
         raise
 
 
-# --------------------------------------------- Discord Code ------------------------------------------------------- #
 
+# --------------------------------------------- Discord Code ------------------------------------------------------- #
 
 class TextGenerationCog(commands.Cog):
     def __init__(self, bot):
@@ -157,10 +157,21 @@ class TextGenerationCog(commands.Cog):
                                     )
                                     return
                 else:
-
-                    instructions = "You are AI Companion named Astra created by SOHAM. Any message given to you is in format [user_id] - [message], just keep a note of the [user_id] u can use it to track the conversation with people and use it to ping users using <@[user_id]> but focus more on message, and reply according to [message]. You are a ery helpful and caring AI companion who loves to chat and fun fun with people"
-
-                    query = f"{instructions} \n{message.author.name} - {message.clean_content}"
+                    referenced_message = message.reference
+                    embed_content = ""
+                    if referenced_message:
+                        referenced_message = await message.channel.fetch_message(referenced_message.message_id)
+                        if referenced_message.embeds:
+                            embed = referenced_message.embeds[0]
+                            embed_content = embed.description or embed.title or ""
+                            embed_fields = "\n".join(f"{field.name}: {field.value}" for field in embed.fields)
+                            embed_content = f"{embed_content}\n{embed_fields}"
+                    
+                    query_content = f"{message.author.name} - {message.clean_content}"
+                    if embed_content:
+                        query = f"Referenced Embed: {embed_content}\n\nUser Query: {query_content}"
+                    else:
+                        query = query_content
 
                     response_text = await generate_response_with_text(
                         message.channel.id, query
@@ -185,11 +196,11 @@ class TextGenerationCog(commands.Cog):
 
         try:
             message_history.pop(interaction.channel_id, None)
-            await interaction.respond("Message Histroty Forgotten!")
+            await interaction.respond("Message History Forgotten!")
 
         except Exception as e:
             await interaction.respond(
-                "An Error Occuered While Forgetting The Message History! Please Check The LOGS!"
+                "An Error Occurred While Forgetting The Message History! Please Check The LOGS!"
             )
 
     @commands.slash_command(
@@ -214,7 +225,6 @@ class TextGenerationCog(commands.Cog):
 
 # --------------------------------------------- Helper Functions ----------------------------------------- #
 
-
 async def split_and_send_messages(
     message_system: discord.Message, text: str, max_length: int
 ):
@@ -229,9 +239,7 @@ def format_discord_message(input_string: str) -> str:
 
     return cleaned_content
 
-
 # --------------------------------------------- Run Bot ------------------------------------------------- #
-
 
 def setup(bot):
     bot.add_cog(TextGenerationCog(bot))
