@@ -243,3 +243,4 @@ def format_discord_message(input_string: str) -> str:
 
 def setup(bot):
     bot.add_cog(TextGenerationCog(bot))
+
