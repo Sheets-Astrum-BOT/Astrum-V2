@@ -12,7 +12,9 @@ Made Using Py-Cord ( Fork Of Discord.py )
 
 ## Special Features
 1. AI Chat Bot
-2. Automatic Anime Notifications
-3. Automatic Meme, Quote, Facts And Joke Sender
+2. Search For Movies / SHows
+3. Automatic Anime Notifications
+4. Automatic Meme, Quote, Facts And Joke Sender
+5. Get Direct Streaming Links For Anime, Shows And Movies
 
 ## INVITE NOW : [ Click Here ](https://discord.com/oauth2/authorize?client_id=1111555652612018246)
